@@ -104,6 +104,9 @@ app.set('appEvents', appEvents);
 //  MIDDLEWARE STACK (Unit V: Creating middlewares)
 // ══════════════════════════════════════════════════════════════
 
+// Trust proxy — required for secure cookies behind Vercel/Render/Railway (Unit V)
+app.set('trust proxy', 1);
+
 // Security headers (Unit V: helmet)
 app.use(helmet({ contentSecurityPolicy: false }));
 
@@ -120,7 +123,11 @@ app.use(session({                                   // Unit V: express-session
   secret: process.env.SESSION_SECRET || 'skytech_secret',
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false, httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }
+  cookie: {
+    secure: process.env.NODE_ENV === 'production', // true on deployment, false in dev
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000
+  }
 }));
 app.use(requestLogger);                             // Unit V: custom middleware
 app.use(express.static(path.join(__dirname, 'public')));
