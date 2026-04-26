@@ -1,0 +1,4524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sky Tech Power Systems</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    /* ================================================================
+   INT219: CSS3, Flexbox, Grid, Box Model, Selectors, Responsive
+   ================================================================ */
+    :root {
+      --bd: #042c53;
+      --bm: #0d47a1;
+      --bmi: #1565c0;
+      --bl: #1976d2;
+      --ba: #42a5f5;
+      --bp: #e3f2fd;
+      --w: #fff;
+      --g1: #f5f7fa;
+      --g2: #eaedf2;
+      --g4: #9aa5b4;
+      --g6: #4a5568;
+      --g8: #1a2332;
+      --gold: #ffa726;
+      --green: #2e7d32;
+      --fh: 'Rajdhani', sans-serif;
+      --fb: 'DM Sans', sans-serif;
+      --sh: 0 4px 24px rgba(13, 71, 161, .10);
+      --tr: all .25s ease;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: var(--fb);
+      color: var(--g8);
+      background: var(--w);
+      overflow-x: hidden;
+      line-height: 1.6
+    }
+
+    img {
+      max-width: 100%;
+      display: block
+    }
+
+    button {
+      cursor: pointer;
+      font-family: var(--fb)
+    }
+
+    /* PAGE ROUTING */
+    .page {
+      display: none
+    }
+
+    .page.active {
+      display: block
+    }
+
+    /* TOP BAR — Flexbox */
+    .topbar {
+      background: var(--bd);
+      padding: 7px 0;
+      font-size: 12.5px
+    }
+
+    .tbi {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px
+    }
+
+    .tbl,
+    .tbr {
+      display: flex;
+      gap: 18px;
+      align-items: center
+    }
+
+    .tbl span,
+    .tbr span {
+      color: #90caf9
+    }
+
+    .ob {
+      color: #66bb6a !important;
+      font-size: 12px
+    }
+
+    .shop-btn {
+      background: var(--ba);
+      color: #fff;
+      padding: 4px 14px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      border: none
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: #fff;
+      border-bottom: 2px solid var(--bp);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 12px rgba(13, 71, 161, .08)
+    }
+
+    .nvi {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px
+    }
+
+    .nvl {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      flex-shrink: 0
+    }
+
+    .bn {
+      font-family: var(--fh);
+      font-size: 19px;
+      font-weight: 700;
+      color: #29abe2;
+      letter-spacing: 1px;
+      line-height: 1.1
+    }
+
+    .bs {
+      font-size: 9.5px;
+      color: #555f6e;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase
+    }
+
+    .nvlinks {
+      display: flex;
+      align-items: center
+    }
+
+    .nvlinks button {
+      background: none;
+      border: none;
+      font-size: 13.5px;
+      color: var(--g6);
+      padding: 0 12px;
+      height: 68px;
+      border-bottom: 3px solid transparent;
+      transition: var(--tr);
+      font-weight: 500
+    }
+
+    .nvlinks button:hover,
+    .nvlinks button.active {
+      color: var(--bmi);
+      border-bottom-color: var(--bmi)
+    }
+
+    .qbtn {
+      background: var(--bmi);
+      color: #fff;
+      padding: 9px 18px;
+      border-radius: 6px;
+      font-size: 13.5px;
+      font-weight: 500;
+      border: none;
+      transition: background .2s
+    }
+
+    .qbtn:hover {
+      background: var(--bl)
+    }
+
+    .hbg {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 8px;
+      background: none;
+      border: none
+    }
+
+    .hbg span {
+      width: 24px;
+      height: 2px;
+      background: var(--g8);
+      border-radius: 2px
+    }
+
+    .mnav {
+      display: none;
+      background: #fff;
+      border-top: 1px solid var(--g2);
+      padding: 8px 0
+    }
+
+    .mnav button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 12px 24px;
+      background: none;
+      border: none;
+      font-size: 15px;
+      color: var(--g6)
+    }
+
+    .mnav button:hover {
+      background: var(--bp);
+      color: var(--bmi)
+    }
+
+    .mnav.open {
+      display: block
+    }
+
+    /* TICKER — CSS Animation */
+    .ticker {
+      background: var(--bmi);
+      padding: 9px 0;
+      overflow: hidden
+    }
+
+    .ttrack {
+      display: flex;
+      gap: 56px;
+      animation: tickMove 35s linear infinite;
+      white-space: nowrap
+    }
+
+    .ti {
+      color: #e3f2fd;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0
+    }
+
+    .td {
+      width: 5px;
+      height: 5px;
+      background: var(--ba);
+      border-radius: 50%;
+      display: inline-block
+    }
+
+    @keyframes tickMove {
+      0% {
+        transform: translateX(0)
+      }
+
+      100% {
+        transform: translateX(-50%)
+      }
+    }
+
+    /* HERO — CSS Grid */
+    .hero {
+      background: linear-gradient(135deg, var(--bd) 0%, var(--bm) 55%, #1565c0 100%);
+      padding: 80px 24px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 450px;
+      height: 450px;
+      background: rgba(255, 255, 255, .03);
+      border-radius: 50%
+    }
+
+    .hinner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1
+    }
+
+    .hbadge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, .12);
+      color: #90caf9;
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255, 255, 255, .2)
+    }
+
+    .htext h1 {
+      font-family: var(--fh);
+      font-size: 44px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 16px
+    }
+
+    .htext h1 span {
+      color: #64b5f6
+    }
+
+    .htext p {
+      color: #b3d4f7;
+      font-size: 16px;
+      line-height: 1.75;
+      margin-bottom: 28px
+    }
+
+    .hbtns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap
+    }
+
+    .hstats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px
+    }
+
+    .scard {
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center
+    }
+
+    .snum {
+      font-family: var(--fh);
+      font-size: 32px;
+      font-weight: 700;
+      color: #fff
+    }
+
+    .slbl {
+      color: #90caf9;
+      font-size: 12px;
+      margin-top: 3px
+    }
+
+    /* BUTTONS */
+    .bpri {
+      background: #fff;
+      color: var(--bm);
+      padding: 12px 28px;
+      border-radius: 6px;
+      font-size: 14.5px;
+      font-weight: 600;
+      border: none;
+      transition: var(--tr)
+    }
+
+    .bpri:hover {
+      background: #e3f2fd;
+      transform: translateY(-1px)
+    }
+
+    .bpri.dark {
+      background: var(--bmi);
+      color: #fff
+    }
+
+    .bpri.dark:hover {
+      background: var(--bl)
+    }
+
+    .bout {
+      background: transparent;
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 6px;
+      font-size: 14.5px;
+      border: 1.5px solid rgba(255, 255, 255, .5);
+      transition: var(--tr)
+    }
+
+    .bout:hover {
+      border-color: #fff;
+      background: rgba(255, 255, 255, .07)
+    }
+
+    .bsub {
+      background: var(--bmi);
+      color: #fff;
+      width: 100%;
+      padding: 13px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      transition: background .2s
+    }
+
+    .bsub:hover {
+      background: var(--bl)
+    }
+
+    /* SECTIONS */
+    .sec {
+      padding: 64px 24px;
+      max-width: 1200px;
+      margin: 0 auto
+    }
+
+    .secbg {
+      background: var(--g1)
+    }
+
+    .seclb {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--bmi);
+      margin-bottom: 8px
+    }
+
+    .sectit {
+      font-family: var(--fh);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--g8);
+      margin-bottom: 10px
+    }
+
+    .seclbw {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #64b5f6;
+      margin-bottom: 8px
+    }
+
+    .sectiw {
+      font-family: var(--fh);
+      font-size: 32px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px
+    }
+
+    .phdr {
+      background: linear-gradient(135deg, var(--bd), var(--bm));
+      padding: 48px 24px;
+      text-align: center
+    }
+
+    .phdr h1 {
+      font-family: var(--fh);
+      font-size: 36px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px
+    }
+
+    .phdr p {
+      color: #90caf9;
+      font-size: 15px
+    }
+
+    /* CAT GRID — CSS Grid */
+    .cgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+      gap: 14px;
+      margin-top: 32px
+    }
+
+    .ccard {
+      background: #fff;
+      border: 1px solid var(--g2);
+      border-radius: 10px;
+      padding: 18px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--tr);
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--g6)
+    }
+
+    .ccard:hover {
+      border-color: var(--bmi);
+      transform: translateY(-3px);
+      box-shadow: var(--sh);
+      color: var(--bmi)
+    }
+
+    .cicon {
+      font-size: 28px;
+      margin-bottom: 8px
+    }
+
+    /* PRODUCTS */
+    .pflts {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 28px
+    }
+
+    .pfbtn {
+      padding: 8px 18px;
+      border-radius: 6px;
+      border: 1.5px solid var(--bmi);
+      background: transparent;
+      color: var(--bmi);
+      font-size: 13.5px;
+      font-weight: 500;
+      transition: var(--tr)
+    }
+
+    .pfbtn.active,
+    .pfbtn:hover {
+      background: var(--bmi);
+      color: #fff
+    }
+
+    .pgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+      gap: 18px;
+      margin-top: 8px
+    }
+
+    .pcard {
+      background: #fff;
+      border: 1px solid var(--g2);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: var(--tr)
+    }
+
+    .pcard:hover {
+      border-color: var(--bmi);
+      box-shadow: var(--sh)
+    }
+
+    .pimgb {
+      background: linear-gradient(135deg, #dbeeff, #b3d4f7);
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      font-size: 48px
+    }
+
+    .pbdg {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--bmi);
+      color: #fff;
+      font-size: 10px;
+      padding: 4px 9px;
+      border-radius: 4px;
+      font-weight: 600
+    }
+
+    .pbody {
+      padding: 14px 16px
+    }
+
+    .ptit {
+      font-family: var(--fh);
+      font-size: 15.5px;
+      font-weight: 600;
+      margin-bottom: 5px
+    }
+
+    .pprc {
+      color: var(--bmi);
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px
+    }
+
+    .pspc {
+      list-style: none
+    }
+
+    .pspc li {
+      font-size: 12.5px;
+      color: var(--g6);
+      padding: 2px 0;
+      display: flex;
+      gap: 5px
+    }
+
+    .pspc li::before {
+      content: '›';
+      color: var(--ba)
+    }
+
+    .pfoot {
+      padding: 10px 16px;
+      border-top: 1px solid var(--g2);
+      display: flex;
+      gap: 8px
+    }
+
+    .bq {
+      background: var(--bmi);
+      color: #fff;
+      font-size: 12.5px;
+      padding: 8px 14px;
+      border-radius: 5px;
+      border: none;
+      flex: 1;
+      font-weight: 500;
+      transition: background .2s
+    }
+
+    .bq:hover {
+      background: var(--bl)
+    }
+
+    .pgn {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 32px;
+      flex-wrap: wrap
+    }
+
+    .pgbtn {
+      background: #fff;
+      border: 1.5px solid var(--g2);
+      color: var(--g6);
+      padding: 8px 14px;
+      border-radius: 5px;
+      font-size: 13.5px;
+      transition: var(--tr)
+    }
+
+    .pgbtn.active,
+    .pgbtn:hover {
+      background: var(--bmi);
+      color: #fff;
+      border-color: var(--bmi)
+    }
+
+    .pgbtn:disabled {
+      opacity: .4;
+      cursor: not-allowed
+    }
+
+    /* WHY SECTION */
+    .whysec {
+      background: var(--bd);
+      padding: 64px 0
+    }
+
+    .fgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 24px;
+      margin-top: 36px
+    }
+
+    .fi {
+      display: flex;
+      gap: 14px
+    }
+
+    .fiico {
+      font-size: 22px;
+      width: 42px;
+      height: 42px;
+      background: rgba(255, 255, 255, .1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0
+    }
+
+    .fit {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px
+    }
+
+    .fid {
+      color: #90caf9;
+      font-size: 12.5px;
+      line-height: 1.6
+    }
+
+    /* CTA */
+    .cta {
+      background: linear-gradient(135deg, var(--bd), var(--bm));
+      padding: 60px 24px;
+      text-align: center
+    }
+
+    .cta h2 {
+      font-family: var(--fh);
+      font-size: 34px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px
+    }
+
+    .cta p {
+      color: #90caf9;
+      font-size: 16px;
+      margin-bottom: 26px
+    }
+
+    .ctabtns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap
+    }
+
+    /* ABOUT */
+    .agrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center
+    }
+
+    .avis {
+      background: linear-gradient(135deg, var(--bd), var(--bm));
+      border-radius: 14px;
+      padding: 36px;
+      color: #fff
+    }
+
+    .asg {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px
+    }
+
+    .ast {
+      background: rgba(255, 255, 255, .1);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center
+    }
+
+    .an {
+      font-family: var(--fh);
+      font-size: 26px;
+      font-weight: 700
+    }
+
+    .al {
+      font-size: 11px;
+      color: #90caf9;
+      margin-top: 2px
+    }
+
+    .acb {
+      background: rgba(255, 255, 255, .08);
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 13.5px;
+      color: rgba(255, 255, 255, .8);
+      line-height: 1.8
+    }
+
+    .atxt p {
+      font-size: 14.5px;
+      color: var(--g6);
+      line-height: 1.75
+    }
+
+    .alist {
+      list-style: none;
+      margin: 16px 0 20px
+    }
+
+    .alist li {
+      font-size: 13.5px;
+      color: var(--g6);
+      padding: 7px 0;
+      border-bottom: 1px solid var(--g2)
+    }
+
+    .bpills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px
+    }
+
+    .bpills span {
+      background: var(--bp);
+      color: var(--bd);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 4px;
+      letter-spacing: .5px
+    }
+
+    /* SOLAR */
+    .stabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+      flex-wrap: wrap
+    }
+
+    .stab {
+      padding: 10px 22px;
+      border-radius: 6px;
+      border: 2px solid var(--bmi);
+      background: transparent;
+      color: var(--bmi);
+      font-size: 14px;
+      font-weight: 600;
+      transition: var(--tr)
+    }
+
+    .stab.active,
+    .stab:hover {
+      background: var(--bmi);
+      color: #fff
+    }
+
+    .service-panel {
+      display: none
+    }
+
+    .service-panel.active {
+      display: block;
+      animation: fadeIn 0.4s
+    }
+
+    .spanel {
+      display: none
+    }
+
+    .spanel.active {
+      display: block
+    }
+
+    .sigrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: start
+    }
+
+    .sbox {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0a2d5e, #1565c0);
+      margin-bottom: 14px
+    }
+
+    .sbox img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block
+    }
+
+    .sbox .noimgmsg {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, .5);
+      font-size: 40px;
+      flex-direction: column;
+      gap: 8px
+    }
+
+    .sbox .noimgmsg span {
+      font-size: 13px
+    }
+
+    .slbtn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, .55);
+      border: none;
+      color: #fff;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      transition: background .2s
+    }
+
+    .slbtn:hover {
+      background: rgba(13, 71, 161, .85)
+    }
+
+    .slprev {
+      left: 10px
+    }
+
+    .slnext {
+      right: 10px
+    }
+
+    .slcnt {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      background: rgba(0, 0, 0, .55);
+      color: #fff;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 10px
+    }
+
+    .sdet h2 {
+      font-family: var(--fh);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--bm);
+      margin-bottom: 12px
+    }
+
+    .sdet p {
+      font-size: 14px;
+      color: var(--g6);
+      line-height: 1.7;
+      margin-bottom: 14px
+    }
+
+    .stags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px
+    }
+
+    .stags span {
+      background: var(--bp);
+      color: var(--bmi);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 4px
+    }
+
+    .sfeat {
+      list-style: none;
+      margin-bottom: 20px
+    }
+
+    .sfeat li {
+      font-size: 13.5px;
+      color: var(--g6);
+      padding: 7px 0;
+      border-bottom: 1px solid var(--g2);
+      display: flex;
+      gap: 8px
+    }
+
+    .sfeat li::before {
+      content: '✓';
+      color: var(--bmi);
+      font-weight: 700
+    }
+
+    .vwrap {
+      margin-top: 0
+    }
+
+    .vlbl {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--bmi);
+      margin-bottom: 10px
+    }
+
+    /* GALLERY */
+    .wflts {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 24px
+    }
+
+    .wfbtn {
+      padding: 7px 16px;
+      border-radius: 20px;
+      border: 1.5px solid var(--bmi);
+      background: transparent;
+      color: var(--bmi);
+      font-size: 13px;
+      font-weight: 500;
+      transition: var(--tr)
+    }
+
+    .wfbtn.active,
+    .wfbtn:hover {
+      background: var(--bmi);
+      color: #fff
+    }
+
+    .wgrid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px
+    }
+
+    .witem {
+      border-radius: 8px;
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: var(--tr);
+      position: relative;
+      overflow: hidden
+    }
+
+    .witem:hover {
+      transform: scale(1.03)
+    }
+
+    .wiico {
+      font-size: 30px
+    }
+
+    .wilbl {
+      color: rgba(255, 255, 255, .75);
+      font-size: 11px;
+      font-weight: 500
+    }
+
+    .wovl {
+      position: absolute;
+      inset: 0;
+      background: rgba(13, 71, 161, .5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: .2s;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600
+    }
+
+    .witem:hover .wovl {
+      opacity: 1
+    }
+
+    /* REVIEWS */
+    .rwrap {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 36px;
+      align-items: start;
+      margin-bottom: 40px
+    }
+
+    .rsum {
+      background: var(--bp);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center
+    }
+
+    .rbig {
+      font-family: var(--fh);
+      font-size: 54px;
+      font-weight: 700;
+      color: var(--bm);
+      line-height: 1
+    }
+
+    .rstbig {
+      font-size: 22px;
+      color: var(--gold);
+      margin: 6px 0
+    }
+
+    .rcnt {
+      font-size: 12.5px;
+      color: var(--g4)
+    }
+
+    .rbrw {
+      margin-top: 14px
+    }
+
+    .rrow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px
+    }
+
+    .rrlb {
+      font-size: 12px;
+      color: var(--g6);
+      width: 44px;
+      text-align: right
+    }
+
+    .rrtr {
+      flex: 1;
+      height: 9px;
+      background: var(--g2);
+      border-radius: 5px;
+      overflow: hidden
+    }
+
+    .rrfl {
+      height: 100%;
+      background: var(--bmi);
+      border-radius: 5px;
+      transition: width .8s ease
+    }
+
+    .rrcnt {
+      font-size: 11px;
+      color: var(--g4);
+      width: 24px
+    }
+
+    .rvlist {
+      display: flex;
+      flex-direction: column;
+      gap: 14px
+    }
+
+    .rvcard {
+      background: #fff;
+      border: 1px solid var(--g2);
+      border-radius: 10px;
+      padding: 16px
+    }
+
+    .rvhdr {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px
+    }
+
+    .rvnm {
+      font-weight: 600;
+      font-size: 14px
+    }
+
+    .rvrole {
+      font-size: 12px;
+      color: var(--g4)
+    }
+
+    .rvst {
+      color: var(--gold);
+      font-size: 14px
+    }
+
+    .rvtxt {
+      font-size: 13.5px;
+      color: var(--g6);
+      line-height: 1.7
+    }
+
+    .rvdt {
+      font-size: 11px;
+      color: var(--g4);
+      margin-top: 6px
+    }
+
+    .rform {
+      background: var(--bp);
+      border-radius: 12px;
+      padding: 28px
+    }
+
+    .rform h3 {
+      font-family: var(--fh);
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px
+    }
+
+    .spick {
+      display: flex;
+      gap: 6px;
+      margin: 12px 0
+    }
+
+    .spick span {
+      font-size: 28px;
+      color: var(--g2);
+      cursor: pointer;
+      transition: color .1s;
+      user-select: none
+    }
+
+    .spick span.lit {
+      color: var(--gold)
+    }
+
+    /* CHAT */
+    .chwrap {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 24px;
+      min-height: 520px
+    }
+
+    .chsb {
+      display: flex;
+      flex-direction: column;
+      gap: 16px
+    }
+
+    .tntbx {
+      background: var(--bp);
+      border-radius: 10px;
+      padding: 14px;
+      margin-top: auto
+    }
+
+    .chm {
+      display: flex;
+      flex-direction: column;
+      border: 1.5px solid var(--g2);
+      border-radius: 12px;
+      overflow: hidden
+    }
+
+    .chbar {
+      background: var(--bd);
+      color: #fff;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500
+    }
+
+    .typi {
+      font-size: 12px;
+      color: #90caf9;
+      font-style: italic
+    }
+
+    .chmsgs {
+      flex: 1;
+      min-height: 350px;
+      max-height: 380px;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: var(--g1)
+    }
+
+    .chinr {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+      border-top: 1px solid var(--g2);
+      background: #fff
+    }
+
+    .chinr input {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1.5px solid var(--g2);
+      border-radius: 6px;
+      font-family: var(--fb);
+      font-size: 14px;
+      outline: none
+    }
+
+    .chinr input:focus {
+      border-color: var(--bmi)
+    }
+
+    .bsend {
+      background: var(--bmi);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 6px;
+      border: none;
+      font-size: 14px;
+      font-weight: 600
+    }
+
+    .cmsg {
+      max-width: 75%
+    }
+
+    .cmsg.mine {
+      align-self: flex-end
+    }
+
+    .cmsg.mine .cbbl {
+      background: var(--bmi);
+      color: #fff
+    }
+
+    .cbbl {
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: #fff;
+      font-size: 13.5px;
+      line-height: 1.5;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .08)
+    }
+
+    .cmeta {
+      font-size: 11px;
+      color: var(--g4);
+      margin-top: 3px
+    }
+
+    .cmsg.mine .cmeta {
+      text-align: right
+    }
+
+    .csys {
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--g4);
+      padding: 6px
+    }
+
+    .cubdg {
+      background: var(--bmi);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 14px
+    }
+
+    .tbdg {
+      background: rgba(255, 255, 255, .08);
+      color: #90caf9;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: .5px;
+      display: inline-block;
+      margin-right: 4px;
+      margin-bottom: 4px
+    }
+
+    /* CONTACT */
+    .cgrid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px
+    }
+
+    .ci {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 18px
+    }
+
+    .ciico {
+      width: 38px;
+      height: 38px;
+      background: var(--bp);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 16px
+    }
+
+    .cil {
+      font-size: 12px;
+      color: var(--g4);
+      margin-bottom: 2px
+    }
+
+    .civ {
+      font-size: 14px;
+      font-weight: 500
+    }
+
+    .mapbtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bp);
+      color: var(--bmi);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 500;
+      margin-top: 8px;
+      transition: var(--tr);
+      text-decoration: none
+    }
+
+    .mapbtn:hover {
+      background: #bbdefb
+    }
+
+    /* FORMS */
+    .frow {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px
+    }
+
+    .fg {
+      margin-bottom: 14px
+    }
+
+    .fg label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--g6);
+      margin-bottom: 5px
+    }
+
+    .fg input,
+    .fg textarea,
+    .fg select {
+      width: 100%;
+      padding: 10px 13px;
+      border: 1.5px solid var(--g2);
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: var(--fb);
+      color: var(--g8);
+      background: #fff;
+      outline: none;
+      transition: border .2s
+    }
+
+    .fg input:focus,
+    .fg textarea:focus,
+    .fg select:focus {
+      border-color: var(--bmi)
+    }
+
+    .fg textarea {
+      height: 90px;
+      resize: vertical
+    }
+
+    .ferr {
+      background: #ffebee;
+      color: #c62828;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      margin-bottom: 10px
+    }
+
+    .fok {
+      background: #e8f5e9;
+      border: 1px solid #a5d6a7;
+      color: var(--green);
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-size: 13.5px;
+      font-weight: 500;
+      margin-top: 10px
+    }
+
+    /* AUTH */
+    .atabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 24px;
+      border-bottom: 2px solid var(--g2)
+    }
+
+    .atab {
+      padding: 10px 24px;
+      background: none;
+      border: none;
+      font-size: 15px;
+      color: var(--g6);
+      font-weight: 500;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: var(--tr)
+    }
+
+    .atab.active {
+      color: var(--bmi);
+      border-bottom-color: var(--bmi)
+    }
+
+    .apanel {
+      display: none
+    }
+
+    .apanel.active {
+      display: block
+    }
+
+    /* FOOTER */
+    .footer {
+      background: #070e1f;
+      padding: 50px 24px 20px
+    }
+
+    .fti {
+      max-width: 1200px;
+      margin: 0 auto
+    }
+
+    .fgrid {
+      display: grid;
+      grid-template-columns: 2.2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px
+    }
+
+    .fblogo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      color: #fff;
+      font-family: var(--fh);
+      font-size: 15px;
+      font-weight: 700
+    }
+
+    .fbrand p {
+      color: #455a64;
+      font-size: 13px;
+      line-height: 1.7;
+      margin-bottom: 14px
+    }
+
+    .fcol h4 {
+      color: #90caf9;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 20px
+    }
+
+    .fcol button {
+      display: block;
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 14px;
+      margin-bottom: 12px;
+      text-align: left;
+      font-family: var(--fb);
+      transition: color .2s
+    }
+
+    .fcol button:hover {
+      color: #fff
+    }
+
+    .fbottom-bar {
+      border-top: 1px solid rgba(255, 255, 255, .05);
+      padding: 20px 24px;
+      margin-top: 40px;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .fbottom-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 13px;
+    }
+
+    .gst-box {
+      background: rgba(255, 255, 255, .05);
+      color: #94a3b8;
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .fsocial {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px
+    }
+
+    .fsoc {
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, .05);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, .6);
+      text-decoration: none;
+      font-size: 16px;
+      transition: var(--tr)
+    }
+
+    .fsoc:hover {
+      background: var(--bm);
+      color: #fff;
+      transform: translateY(-3px)
+    }
+
+    /* LIVE NOTIF / TOAST */
+    .lnotif {
+      background: linear-gradient(90deg, var(--bd), var(--bm));
+      color: #fff;
+      padding: 10px 24px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--bd);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      z-index: 9999;
+      transform: translateX(200%);
+      transition: transform .3s;
+      max-width: 320px
+    }
+
+    .toast.show {
+      transform: translateX(0)
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--g4);
+      font-size: 15px
+    }
+
+    /* RESPONSIVE — Media Queries (INT219) */
+    @media(max-width:1024px) {
+
+      .hinner,
+      .agrid,
+      .cgrid2,
+      .sigrid,
+      .chwrap {
+        grid-template-columns: 1fr
+      }
+
+      .htext h1 {
+        font-size: 36px
+      }
+
+      .rwrap {
+        grid-template-columns: 1fr
+      }
+
+      .wgrid {
+        grid-template-columns: repeat(3, 1fr)
+      }
+
+      .fgrid {
+        grid-template-columns: 1fr 1fr
+      }
+    }
+
+    @media(max-width:768px) {
+      .nvlinks {
+        display: none
+      }
+
+      .hbg {
+        display: flex
+      }
+
+      .hero {
+        padding: 50px 20px
+      }
+
+      .htext h1 {
+        font-size: 28px
+      }
+
+      .hstats {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .wgrid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .frow {
+        grid-template-columns: 1fr
+      }
+
+      .sectit {
+        font-size: 26px
+      }
+
+      .chwrap {
+        grid-template-columns: 1fr
+      }
+    }
+
+    @media(max-width:480px) {
+      .tbi {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px
+      }
+
+      .htext h1 {
+        font-size: 24px
+      }
+
+      .fgrid {
+        grid-template-columns: 1fr
+      }
+
+      .hstats {
+        grid-template-columns: 1fr 1fr
+      }
+    }
+
+    /* HERO SERVICES BOX — replaces stats grid */
+    .hero-services-box {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 14px;
+      padding: 24px;
+      backdrop-filter: blur(4px)
+    }
+
+    .hsb-title {
+      font-family: var(--fh);
+      font-size: 16px;
+      font-weight: 700;
+      color: #64b5f6;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      margin-bottom: 16px
+    }
+
+    .hsb-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 18px
+    }
+
+    .hsb-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 8px
+    }
+
+    .hsb-ico {
+      font-size: 22px;
+      width: 36px;
+      text-align: center;
+      flex-shrink: 0
+    }
+
+    .hsb-name {
+      color: white;
+      font-size: 13.5px;
+      font-weight: 500;
+      line-height: 1.2
+    }
+
+    .hsb-desc {
+      color: #90caf9;
+      font-size: 11.5px;
+      margin-top: 2px
+    }
+
+    .hsb-call {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: white;
+      color: var(--bm);
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: var(--tr)
+    }
+
+    .hsb-call:hover {
+      background: #e3f2fd;
+      transform: translateY(-1px)
+    }
+
+    /* SLIDE THUMBNAILS */
+    .slide-thumbs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+      justify-content: center
+    }
+
+    .sthumb {
+      width: 28px;
+      height: 28px;
+      border-radius: 5px;
+      background: var(--g2);
+      color: var(--g6);
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--tr);
+      border: 2px solid transparent
+    }
+
+    .sthumb.active,
+    .sthumb:hover {
+      background: var(--bmi);
+      color: white;
+      border-color: var(--bmi)
+    }
+
+    /* CALL FOR ENQUIRY button style in product cards */
+    .bq {
+      background: var(--bmi);
+      color: #fff;
+      font-size: 12px;
+      padding: 8px 12px;
+      border-radius: 5px;
+      border: none;
+      flex: 1;
+      font-weight: 600;
+      transition: background .2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px
+    }
+
+    .bq:hover {
+      background: var(--bl)
+    }
+
+    /* Remove qbtn if somehow still present */
+    .qbtn {
+      display: none
+    }
+
+    /* PRODUCT SPEC MODAL */
+    .spec-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      z-index: 8000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(3px)
+    }
+
+    .spec-modal {
+      background: var(--w);
+      border-radius: 14px;
+      max-width: 700px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3)
+    }
+
+    .spec-modal-head {
+      background: linear-gradient(135deg, var(--bd), var(--bmi));
+      padding: 22px 24px;
+      border-radius: 14px 14px 0 0;
+      position: sticky;
+      top: 0;
+      z-index: 1
+    }
+
+    .spec-modal-head h2 {
+      font-family: var(--fh);
+      font-size: 22px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 4px
+    }
+
+    .spec-modal-head p {
+      color: #90caf9;
+      font-size: 13px
+    }
+
+    .spec-close {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .spec-close:hover {
+      background: rgba(255, 255, 255, 0.3)
+    }
+
+    .spec-modal-body {
+      padding: 24px
+    }
+
+    .spec-section {
+      margin-bottom: 20px
+    }
+
+    .spec-section-title {
+      font-family: var(--fh);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--bmi);
+      border-bottom: 2px solid var(--bp);
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: .5px
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse
+    }
+
+    .spec-table tr {
+      border-bottom: 1px solid var(--g2)
+    }
+
+    .spec-table tr:last-child {
+      border-bottom: none
+    }
+
+    .spec-table td {
+      padding: 9px 12px;
+      font-size: 13.5px
+    }
+
+    .spec-table td:first-child {
+      color: var(--g6);
+      font-weight: 500;
+      width: 45%;
+      background: var(--g1)
+    }
+
+    .spec-table td:last-child {
+      color: var(--g8);
+      font-weight: 500
+    }
+
+    .bpe-badge-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px
+    }
+
+    .bpe-cert {
+      background: #e8f5e9;
+      color: #1b5e20;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 4px;
+      border: 1px solid #a5d6a7
+    }
+
+    .spec-modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--g2);
+      display: flex;
+      gap: 10px;
+      position: sticky;
+      bottom: 0;
+      background: white;
+      border-radius: 0 0 14px 14px
+    }
+
+    .brand-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px
+    }
+
+    .brand-item {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 700;
+      color: var(--bm);
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s
+    }
+
+    .brand-item:hover {
+      transform: translateY(-5px);
+      border-color: var(--ba)
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- TOP BAR (INT219: Semantic HTML, Flexbox) -->
+  <header class="topbar">
+    <div class="tbi">
+      <div class="tbl">
+        <span>📞 +91-99945 06370</span>
+        <span>✉ skytechpowersystems@gmail.com</span>
+      </div>
+      <div class="tbr">
+        <span class="ob" id="onlineEl">● 1 online</span>
+        <button class="shop-btn" onclick="showPage('login')">👤 Login</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nvi">
+      <div class="nvl" onclick="showPage('home')" style="gap:15px">
+        <img src="images/logo skytech 1.png" alt="Sky Tech Logo" style="height:52px;width:auto">
+        <div style="line-height:1.2">
+          <div style="font-family:var(--fh);font-size:24px;font-weight:700">
+            <span style="color:#29abe2">SKY</span> <span style="color:#555f6e">TECH</span>
+          </div>
+          <div style="font-size:11px;color:#555f6e;font-weight:600;letter-spacing:1px;text-transform:uppercase">Power
+            Systems</div>
+        </div>
+      </div>
+      <div class="nvlinks">
+        <button onclick="showPage('home')" id="nav-home" class="active">Home</button>
+        <button onclick="showPage('about')" id="nav-about">About</button>
+        <button onclick="showPage('products')" id="nav-products">Products</button>
+        <button onclick="showPage('services')" id="nav-services">Power Solutions</button>
+        <button onclick="showPage('gallery')" id="nav-gallery">IT &amp; Support Services</button>
+        <button onclick="showPage('reviews')" id="nav-reviews">Reviews</button>
+        <button onclick="showPage('chat')" id="nav-chat">Live Chat</button>
+        <button onclick="showPage('contact')" id="nav-contact"
+          style="padding:10px 24px; border-radius:6px; margin-left:12px; color:white; background-color:#29abe2; border:none; box-shadow:var(--sh); font-weight:600; letter-spacing:0.5px; transition:var(--tr); height:40px; line-height:normal;">Contact Us</button>
+      </div>
+      <button class="hbg" onclick="toggleNav()"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mnav" id="mnav">
+      <button onclick="showPage('home');closeMnav()">Home</button>
+      <button onclick="showPage('about');closeMnav()">About</button>
+      <button onclick="showPage('products');closeMnav()">Products</button>
+      <button onclick="showPage('services');closeMnav()">Power Solutions</button>
+      <button onclick="showPage('gallery');closeMnav()">IT &amp; Support Services</button>
+      <button onclick="showPage('reviews');closeMnav()">Reviews</button>
+      <button onclick="showPage('chat');closeMnav()">Live Chat</button>
+      <button onclick="showPage('contact');closeMnav()" style="color:var(--bmi);font-weight:700">Contact Us</button>
+    </div>
+  </nav>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ttrack">
+      <span class="ti"><span class="td"></span>UPS Systems</span>
+      <span class="ti"><span class="td"></span>Batteries</span>
+      <span class="ti"><span class="td"></span>Inverters</span>
+      <span class="ti"><span class="td"></span>Solar Solutions</span>
+      <span class="ti"><span class="td"></span>Servo Stabilizers</span>
+      <span class="ti"><span class="td"></span>UPS Systems</span>
+      <span class="ti"><span class="td"></span>Batteries</span>
+      <span class="ti"><span class="td"></span>Inverters</span>
+      <span class="ti"><span class="td"></span>Solar Solutions</span>
+      <span class="ti"><span class="td"></span>Servo Stabilizers</span>
+    </div>
+  </div>
+  <div id="lnotif" class="lnotif" style="display:none"></div>
+
+  <!-- ══════════════════════ HOME ══════════════════════ -->
+  <main class="page active" id="page-home">
+    <section class="hero">
+      <div class="hinner">
+        <div class="htext">
+          <div class="hbadge">Trusted Power Partner Since 2010</div>
+          <h1>Power Your Business with <span>Reliable Energy Systems</span></h1>
+          <p>Sky Tech Power Systems delivers industry-leading UPS, solar, battery, and power conditioning solutions
+            across Tamil Nadu.</p>
+          <div class="hbtns">
+            <button class="bpri" onclick="showPage('products')">Explore Products →</button>
+            <button class="bout" onclick="showPage('contact')">Contact Us</button>
+          </div>
+        </div>
+
+        <div class="hero-services-box">
+          <div class="hsb-title">AMC & Service Excellence</div>
+          <div class="hsb-list">
+            <div class="hsb-item">
+              <div class="hsb-ico">🛠️</div>
+              <div>
+                <div class="hsb-name">Annual Maintenance</div>
+                <div class="hsb-desc">Comprehensive support for all brands</div>
+              </div>
+            </div>
+            <div class="hsb-item">
+              <div class="hsb-ico">⚡</div>
+              <div>
+                <div class="hsb-name">24/7 Emergency Support</div>
+                <div class="hsb-desc">Rapid response team in Coimbatore</div>
+              </div>
+            </div>
+          </div>
+          <a href="tel:+919994506370" class="hsb-call">📞 Call for AMC: 99945 06370</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="seclb">Browse by Category</div>
+      <div class="sectit">Our Product Range</div>
+      <div class="cgrid">
+        <div class="ccard" onclick="goProducts('ups-online')">
+          <div class="cicon">⚡</div>Online UPS
+        </div>
+        <div class="ccard" onclick="goProducts('ups-offline')">
+          <div class="cicon">🔌</div>Offline UPS
+        </div>
+        <button class="ccard" onclick="showPage('services', 'solar')">
+          <div class="cicon">☀️</div>Solar Energy
+        </button>
+        <div class="ccard" onclick="goProducts('battery')">
+          <div class="cicon">🔋</div>Batteries
+        </div>
+        <div class="ccard" onclick="goProducts('stabilizer')">
+          <div class="cicon">📊</div>Stabilizer
+        </div>
+        <div class="ccard" onclick="goProducts('computer')">
+          <div class="cicon">💻</div>Computer
+        </div>
+        <div class="ccard" onclick="showPage('gallery', 'it-amc')">
+          <div class="cicon">🛠️</div>AMC Service
+        </div>
+        <div class="ccard" onclick="goProducts('inverter')">
+          <div class="cicon">🔼</div>Lift Inverter
+        </div>
+      </div>
+    </section>
+
+    <div class="secbg">
+      <div class="sec">
+        <div class="seclb">Featured Products</div>
+        <div class="sectit">Top Selling Solutions</div>
+        <div class="pgrid" id="featGrid"></div>
+      </div>
+    </div>
+
+
+
+    <div class="whysec">
+      <div class="sec">
+        <div class="seclbw">Why Choose Us</div>
+        <div class="sectiw">Your Trusted Power Partner</div>
+        <div class="fgrid">
+          <div class="fi">
+            <div class="fiico">🛡️</div>
+            <div>
+              <div class="fit">Quality Assured</div>
+              <div class="fid">All products tested to ISI &amp; international standards.</div>
+            </div>
+          </div>
+          <div class="fi">
+            <div class="fiico">✅</div>
+            <div>
+              <div class="fit">Authorized Dealer</div>
+              <div class="fid">Official dealer for Eaton, Emerson, BPE, APC, Numeric, Hitachi, Exide, Luminous,
+                Microtek, Okaya, Amaron, Amaron Honda.</div>
+            </div>
+          </div>
+          <div class="fi">
+            <div class="fiico">🕐</div>
+            <div>
+              <div class="fit">24/7 Support</div>
+              <div class="fid">Round-the-clock AMC service and emergency support for all top brands.</div>
+            </div>
+          </div>
+          <div class="fi">
+            <div class="fiico">📍</div>
+            <div>
+              <div class="fit">Pan Region Coverage</div>
+              <div class="fid">Fast installation across Tamil Nadu and South India.</div>
+            </div>
+          </div>
+          <div class="fi">
+            <div class="fiico">💳</div>
+            <div>
+              <div class="fit">Easy Financing</div>
+              <div class="fid">Flexible EMI and payment options available.</div>
+            </div>
+          </div>
+          <div class="fi">
+            <div class="fiico">⭐</div>
+            <div>
+              <div class="fit">Expert Engineers</div>
+              <div class="fid">15+ years of expertise in power systems.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta">
+      <h2>Book Your Free Technical Site Survey</h2>
+      <p>Our experts visit your site and provide a customised solution — at no cost.</p>
+      <div class="ctabtns">
+        <button class="bpri" onclick="showPage('contact')">Book Now</button>
+        <button class="bout" onclick="showPage('about')">Learn More</button>
+      </div>
+    </div>
+    <div class="amc-logos-sec"
+      style="background:#f8fafc;padding:60px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0">
+      <div class="sec">
+        <div class="seclb" style="text-align:center">Our Trusted Network</div>
+        <div class="sectit" style="text-align:center;margin-bottom:40px">Prestigious AMC Clients</div>
+        <div style="overflow:hidden;position:relative;padding:20px 0">
+          <style>
+            .amc-track {
+              display: flex;
+              gap: 40px;
+              animation: amcScroll 40s linear infinite;
+              width: max-content;
+            }
+
+            .amc-card {
+              background: white;
+              padding: 20px 35px;
+              border-radius: 12px;
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+              font-family: var(--fh);
+              font-size: 18px;
+              font-weight: 700;
+              color: var(--bm);
+              border: 1px solid #edf2f7;
+              white-space: nowrap;
+              transition: var(--tr);
+            }
+
+            .amc-card:hover {
+              transform: translateY(-5px);
+              border-color: var(--ba);
+              color: var(--ba);
+            }
+
+            @keyframes amcScroll {
+              0% {
+                transform: translateX(0);
+              }
+
+              100% {
+                transform: translateX(-50%);
+              }
+            }
+          </style>
+          <div class="amc-track">
+            <div class="amc-card">Sri Krishna Institutions</div>
+            <div class="amc-card">Akshaya College</div>
+            <div class="amc-card">Kovai Kalaimagal College</div>
+            <div class="amc-card">Adithya Institutions</div>
+            <div class="amc-card">Bharathiar University</div>
+            <div class="amc-card">KIET (Karpagam)</div>
+            <div class="amc-card">Govt Polytechnic Coimbatore</div>
+            <div class="amc-card">PSG Institutions</div>
+            <div class="amc-card">Amrita University</div>
+            <!-- Repeat -->
+            <div class="amc-card">Sri Krishna Institutions</div>
+            <div class="amc-card">Akshaya College</div>
+            <div class="amc-card">Kovai Kalaimagal College</div>
+            <div class="amc-card">Adithya Institutions</div>
+            <div class="amc-card">Bharathiar University</div>
+            <div class="amc-card">KIET (Karpagam)</div>
+            <div class="amc-card">Govt Polytechnic Coimbatore</div>
+            <div class="amc-card">PSG Institutions</div>
+            <div class="amc-card">Amrita University</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ══════════════════════ ABOUT ══════════════════════ -->
+  <article class="page" id="page-about">
+    <div class="phdr">
+      <h1>About Us</h1>
+      <p>Network-based service-oriented organization</p>
+    </div>
+    <div class="sec">
+      <div class="agrid">
+        <div class="avis">
+          <div class="asg">
+            <div class="ast">
+              <div class="an">1500+</div>
+              <div class="al">Clients</div>
+            </div>
+            <div class="ast">
+              <div class="an">15 Yrs</div>
+              <div class="al">Experience</div>
+            </div>
+            <div class="ast">
+              <div class="an">200+</div>
+              <div class="al">Products</div>
+            </div>
+            <div class="ast">
+              <div class="an">50+</div>
+              <div class="al">Brands</div>
+            </div>
+          </div>
+          <div class="acb">
+            <p>📍 5/270, Balaji Complex, 7th Street Ext,<br>Opp. Syndicate Bank, Gandhipuram, Coimbatore-12</p>
+            <p style="margin-top:8px">📞 +91-99945 06370</p>
+            <p>✉ skytechpowersystems@gmail.com</p>
+          </div>
+        </div>
+        <div class="atxt">
+          <div class="seclb">Who We Are</div>
+          <div class="sectit">Network-Based Service Organization</div>
+          <p>Sky Tech Power Systems is a leading power solution provider in Coimbatore, Tamil Nadu. We supply, install,
+            and service a wide range of power protection and conditioning equipment with a customer-first approach.</p>
+          <p style="margin-top:12px">We have tied up with market-leading brands like Exide, Microtek, Luminous, Okaya,
+            APC, and Numeric to provide the best solution at a great price.</p>
+          <ul class="alist">
+            <li>✓ Dealers in: Home Inverter, Online UPS, Battery, Lift Inverter, Solar System, Stabilizer</li>
+            <li>✓ Authorized dealer for top national &amp; international brands</li>
+            <li>✓ Annual Maintenance Contracts (AMC) for all brands</li>
+            <li>✓ Serving hospitals, factories, IT firms, and homes</li>
+            <li>✓ Free Technical Site Survey on request</li>
+          </ul>
+          <div class="bpills">
+            <span>EATON</span><span>EMERSON</span><span>AMARON</span><span>AMARON
+              HONDA</span><span>MICROTEK</span><span>BPE</span><span>APC</span><span>NUMERIC</span><span>HITACHI</span><span>EXIDE</span>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="cta">
+      <h2>Book Your Free Technical Site Survey</h2>
+      <p>Our experts assess your power requirements at no cost.</p>
+      <div class="ctabtns"><button class="bpri" onclick="showPage('contact')">Book Now</button></div>
+    </div>
+  </article>
+
+  <!-- ══════════════════════ PRODUCTS ══════════════════════ -->
+  <article class="page" id="page-products">
+    <div class="phdr">
+      <h1>Our Products</h1>
+      <p>UPS, batteries, stabilizers and power systems</p>
+    </div>
+    <div class="sec">
+      <div class="pflts" id="pflts" style="margin-bottom:10px">
+        <button class="pfbtn active" onclick="loadProds('all',this)">All</button>
+        <button class="pfbtn" onclick="loadProds('online-ups',this)">Online UPS</button>
+        <button class="pfbtn" onclick="loadProds('offline-ups',this)">Offline UPS</button>
+        <button class="pfbtn" onclick="loadProds('battery',this)">Batteries</button>
+        <button class="pfbtn" onclick="loadProds('stabilizer',this)">Stabilizer</button>
+        <button class="pfbtn" onclick="loadProds('inverter',this)">Lift Inverter</button>
+        <button class="pfbtn" onclick="loadProds('solar',this)">Solar</button>
+      </div>
+
+
+
+      <div class="pgrid" id="prodGrid"></div>
+      <div class="pgn" id="prodPgn"></div>
+
+    </div>
+  </article>
+
+  <!-- ══════════════════════ SERVICES ══════════════════════ -->
+  <article class="page" id="page-services">
+    <div class="phdr">
+      <h1>Our Services</h1>
+      <p>Comprehensive power and specialized technology solutions</p>
+    </div>
+    <div class="sec">
+      <div class="stabs main-services-tabs" style="justify-content:center;margin-bottom:40px">
+        <button class="stab active" onclick="switchService('solar',this)">☀️ Solar</button>
+        <button class="stab" onclick="switchService('ups',this)">⚡ UPS</button>
+
+      </div>
+
+      <!-- SOLAR SECTION -->
+      <div class="service-panel active" id="ser-solar">
+        <!-- ... Solar content follows ... -->
+
+        <!-- ONGRID -->
+        <div style="margin-bottom:60px; padding-bottom:60px; border-bottom:1px solid #e2e8f0">
+          <div class="sigrid">
+            <div>
+              <div class="sbox">
+                <img id="ongrid-img" src="images/ongrid_solar_1.jfif" alt="Ongrid Solar"
+                  onerror="this.style.display='none';document.getElementById('ongrid-ph').style.display='flex'">
+                <div id="ongrid-ph" class="noimgmsg" style="display:none"><span>☀️</span><span>Add
+                    images/ongrid_solar_1.jfif</span></div>
+                <button class="slbtn slprev" onclick="slideNav('ongrid',-1)">‹</button>
+                <button class="slbtn slnext" onclick="slideNav('ongrid',1)">›</button>
+                <div class="slcnt" id="sc-ongrid">1 / 16</div>
+              </div>
+            </div>
+            <div class="sdet">
+              <h2>☀️ Online Solar UPS (Ongrid)</h2>
+              <p>Connect your solar system to the electricity grid. Reduce electricity bills by up to 90% and earn
+                credits through net metering. Ideal for homes and commercial buildings.</p>
+              <div class="stags"><span>Grid-Tied</span><span>No Battery Needed</span><span>Net
+                  Metering</span><span>Govt. Subsidy</span></div>
+              <ul class="sfeat">
+                <li>Reduces electricity bill by up to 90%</li>
+                <li>Earn money selling excess power to DISCOM</li>
+                <li>Eligible for PM Surya Ghar subsidy</li>
+                <li>Low maintenance — no battery replacement</li>
+                <li>25-year panel performance warranty</li>
+              </ul>
+              <button class="bpri dark" onclick="prefillEnquiry('Ongrid Solar')">📞 Call for Enquiry</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- OFFLINE -->
+        <div style="margin-bottom:60px; padding-bottom:60px; border-bottom:1px solid #e2e8f0">
+          <div class="sigrid">
+            <div>
+              <div class="sbox" id="sbox-offline">
+                <img id="offline-img" src="images/offline_solar_1.jfif" alt="Offline Solar UPS 1"
+                  onerror="this.style.display='none';document.getElementById('offline-ph').style.display='flex'">
+                <div id="offline-ph" class="noimgmsg" style="display:none">
+                  <span>🔋</span>
+                  <span id="offline-fname">images/offline_solar_1.jfif</span>
+                </div>
+                <button class="slbtn slprev" onclick="slideNav('offline',-1)">‹</button>
+                <button class="slbtn slnext" onclick="slideNav('offline',1)">›</button>
+                <div class="slcnt" id="sc-offline">1 / 5</div>
+              </div>
+              <div class="slide-thumbs" id="thumbs-offline"></div>
+            </div>
+            <div class="sdet">
+              <h2>🔋 Offline Solar UPS</h2>
+              <p>Power your home or business even during grid failures. Our offline solar UPS systems store solar energy
+                in batteries and deliver clean, uninterrupted power — day and night.</p>
+              <div class="stags"><span>Battery Backup</span><span>Works Without Grid</span><span>24/7
+                  Power</span><span>Silent</span></div>
+              <ul class="sfeat">
+                <li>Works independently when grid is down</li>
+                <li>Charges from solar panels during daytime</li>
+                <li>Battery backup for 6–12+ hours</li>
+                <li>Powers fans, lights, computers, appliances</li>
+                <li>Ideal for homes, shops, clinics</li>
+              </ul>
+              <button class="bpri dark" onclick="prefillEnquiry('Offline Solar UPS')">📞 Call for Enquiry</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SOLAR WATER PUMPS -->
+        <div style="margin-bottom:60px; padding-bottom:60px; border-bottom:1px solid #e2e8f0">
+          <div class="sigrid">
+            <div>
+              <div class="sbox" id="sbox-pump">
+                <img id="pump-img" src="images/solar_pump_1.jfif" alt="Solar Water Pump"
+                  onerror="this.style.display='none';document.getElementById('pump-ph').style.display='flex'">
+                <div id="pump-ph" class="noimgmsg" style="display:none">
+                  <span>💧</span>
+                  <span id="pump-fname">images/solar_pump_1.jfif</span>
+                </div>
+                <button class="slbtn slprev" onclick="slideNav('pump',-1)">‹</button>
+                <button class="slbtn slnext" onclick="slideNav('pump',1)">›</button>
+                <div class="slcnt" id="sc-pump">1 / 1</div>
+              </div>
+              <div class="slide-thumbs" id="thumbs-pump"></div>
+
+              <!-- ═══ VIDEO SECTION ═══ -->
+              <div class="vwrap">
+                <div class="vlbl">📹 Solar Pump — Live Demo Video</div>
+
+                <!--
+            ══════════════════════════════════════════════════════
+            HOW TO ATTACH YOUR VIDEO IN VS CODE:
+
+            OPTION 1 — Local MP4 file (recommended):
+              Step 1: Convert your .mhtml video:
+                - Open the .mhtml in Chrome → it plays in browser
+                - Right-click the video → "Save video as" → save as solar_pump_video.mp4
+                - OR open VLC → Media → Convert → add .mhtml → convert to MP4
+              Step 2: Copy solar_pump_video.mp4 into your "images" folder
+              Step 3: The <source> tag below already points to images/solar_pump_video.mp4
+                      It will play automatically once the file is there.
+
+            OPTION 2 — YouTube video link:
+              Step 1: Upload your video to YouTube (or use any existing link)
+              Step 2: Replace the entire <video>...</video> block below with:
+                <iframe width="100%" height="260" style="border-radius:10px;border:none"
+                  src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                  allowfullscreen></iframe>
+              Example: if your YouTube URL is https://www.youtube.com/watch?v=abc123
+                       replace YOUR_VIDEO_ID with abc123
+
+            OPTION 3 — Google Drive video:
+              Step 1: Upload to Google Drive → right-click → Get Link → Anyone with link
+              Step 2: Copy the file ID from the link
+                      e.g. https://drive.google.com/file/d/FILE_ID/view
+              Step 3: Replace the <video> block with:
+                <iframe width="100%" height="260" style="border-radius:10px;border:none"
+                  src="https://drive.google.com/file/d/FILE_ID/preview"
+                  allowfullscreen></iframe>
+            ══════════════════════════════════════════════════════
+            -->
+
+                <video id="pumpVideo" controls
+                  style="width:100%;border-radius:10px;max-height:260px;background:#000;display:block;">
+                  <source src="images/solar_pump_video.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+
+                <!-- Shown when video file is missing -->
+                <div id="vfb"
+                  style="display:none;background:#0a2d5e;border-radius:10px;padding:24px;text-align:center;margin-top:4px;">
+                  <div style="font-size:32px;margin-bottom:10px">📹</div>
+                  <div style="color:white;font-size:14px;font-weight:600;margin-bottom:8px">Video not found</div>
+                  <div style="color:#90caf9;font-size:12px;line-height:1.7">
+                    Place <strong style="color:#64b5f6">solar_pump_video.mp4</strong> in your <strong
+                      style="color:#64b5f6">images/</strong> folder<br>
+                    OR paste a YouTube/Google Drive link (see code comments above)
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="sdet">
+              <h2>💧 Solar Water Pumps</h2>
+              <p>Run water pumps on solar energy — zero electricity running cost for agriculture, borewell, drip
+                irrigation, and domestic use. Designed for Indian farming conditions.</p>
+              <div class="stags"><span>Agriculture</span><span>Borewell</span><span>Zero Running
+                  Cost</span><span>PM-KUSUM</span></div>
+              <ul class="sfeat">
+                <li>No electricity bill for water pumping</li>
+                <li>Works from 1 HP to 10 HP capacity</li>
+                <li>Suitable for borewell, open well, drip irrigation</li>
+                <li>Eligible for PM-KUSUM government subsidy</li>
+                <li>Minimal maintenance — no fuel, no generator</li>
+              </ul>
+              <button class="bpri dark" onclick="prefillEnquiry('Solar Water Pumps')">📞 Call for Enquiry</button>
+            </div>
+          </div>
+
+          <!-- Solar CTA (Inside Solar Panel) -->
+          <div class="cta" style="margin-top:40px; border-radius:12px">
+            <h2>Book Your Free Solar Site Survey</h2>
+            <p>Free assessment and custom solar proposal for your home or business.</p>
+            <div class="ctabtns"><button class="bpri" onclick="showPage('contact')">Book Now</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UPS SECTION -->
+        <div class="service-panel" id="ser-ups">
+
+          <!-- Online UPS -->
+          <div id="ups-online-sec" style="margin-bottom:60px;padding-bottom:60px;border-bottom:1px solid #e2e8f0">
+            <div class="sigrid">
+              <div>
+                <div class="sbox" id="sbox-ups-online">
+                  <img id="ups-online-img" src="images/Eaton_online_ups.png" alt="Online UPS"
+                    onerror="this.style.display='none';document.getElementById('ups-online-ph').style.display='flex'">
+                  <div id="ups-online-ph" class="noimgmsg" style="display:none">
+                    <span>⚡</span><span id="ups-online-fname">images/Eaton_online_ups.png</span>
+                  </div>
+                  <button class="slbtn slprev" onclick="slideNav('ups-online',-1)">‹</button>
+                  <button class="slbtn slnext" onclick="slideNav('ups-online',1)">›</button>
+                  <div class="slcnt" id="sc-ups-online">1 / 4</div>
+                </div>
+                <div class="slide-thumbs" id="thumbs-ups-online"></div>
+              </div>
+              <div class="sdet">
+                <div class="seclb">High Performance</div>
+                <h2>⚡ Online UPS Systems</h2>
+                <p>Ensure zero transfer time and pure sine wave output for your critical equipment. Ideal for IT infrastructure, medical equipment, and industrial machinery.</p>
+                <div class="stags"><span>Double Conversion</span><span>Zero Transfer Time</span><span>Pure Sine Wave</span><span>SNMP Ready</span></div>
+                <ul class="sfeat">
+                  <li><strong>Premium Brands:</strong> Eaton, Emerson, BPE, APC, Microtek, Exide, Okaya</li>
+                  <li>1 KVA to 500 KVA capacity available</li>
+                  <li>Protects against power surges, sags, and outages</li>
+                  <li>Ideal for data centers, hospitals &amp; sensitive electronics</li>
+                  <li>Remote monitoring with SNMP support</li>
+                </ul>
+                <button class="bpri dark" onclick="prefillEnquiry('Online UPS')">📞 Call for Enquiry</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Offline UPS -->
+          <div id="ups-offline-sec" style="margin-bottom:20px">
+            <div class="sigrid">
+              <div>
+                <div class="sbox" id="sbox-ups-offline">
+                  <img id="ups-offline-img" src="images/Microtek_ups.png" alt="Offline UPS"
+                    onerror="this.style.display='none';document.getElementById('ups-offline-ph').style.display='flex'">
+                  <div id="ups-offline-ph" class="noimgmsg" style="display:none">
+                    <span>🔌</span><span id="ups-offline-fname">images/Microtek_ups.png</span>
+                  </div>
+                  <button class="slbtn slprev" onclick="slideNav('ups-offline',-1)">‹</button>
+                  <button class="slbtn slnext" onclick="slideNav('ups-offline',1)">›</button>
+                  <div class="slcnt" id="sc-ups-offline">1 / 5</div>
+                </div>
+                <div class="slide-thumbs" id="thumbs-ups-offline"></div>
+              </div>
+              <div class="sdet">
+                <div class="seclb">Cost Effective</div>
+                <h2>🔌 Offline / Line Interactive UPS</h2>
+                <p>Reliable and cost-effective power backup for home, office, and small business applications. Automatic voltage regulation keeps your devices safe.</p>
+                <div class="stags"><span>Cost Effective</span><span>Battery Backup</span><span>Home &amp; Office</span><span>AVR Built-in</span></div>
+                <ul class="sfeat">
+                  <li><strong>Trusted Brands:</strong> Microtek, Exide, APC, Okaya, Mtech</li>
+                  <li>600VA to 5 KVA capacity</li>
+                  <li>Energy efficient design with fast charging</li>
+                  <li>Perfect for desktops, networking gear, and home electronics</li>
+                  <li>Transfer time &lt;10ms — near-seamless switchover</li>
+                </ul>
+                <button class="bpri dark" onclick="prefillEnquiry('Offline UPS')">📞 Call for Enquiry</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+      </div>
+      <div class="cta">
+        <h2>Connect with our experts</h2>
+        <p>Professional installation and maintenance specialized for Coimbatore and suburbs.</p>
+        <div class="ctabtns"><button class="bpri" onclick="showPage('contact')">Contact Us</button></div>
+      </div>
+  </article>
+
+  <!-- ══════════════════════ IT & SUPPORT SERVICES ══════════════════════ -->
+  <article class="page" id="page-gallery">
+    <div class="phdr">
+      <h1>IT &amp; Support Services</h1>
+      <p>Comprehensive computer systems, power backup, and AMC maintenance</p>
+    </div>
+    <div class="sec">
+
+      <!-- Top-level tabs for IT & Support -->
+      <div class="stabs main-services-tabs" style="justify-content:center;margin-bottom:40px">
+        <button class="stab active" onclick="switchService('it-computers',this)">💻 Computers</button>
+        <button class="stab" onclick="switchService('it-batteries',this)">🔋 Batteries</button>
+        <button class="stab" onclick="switchService('it-stabilizers',this)">📊 Stabilizers</button>
+        <button class="stab" onclick="switchService('it-inverters',this)">🔼 Lift Inverters</button>
+        <button class="stab" onclick="switchService('it-amc',this)">🛠️ AMC Services</button>
+      </div>
+
+      <!-- COMPUTERS SECTION -->
+      <div class="service-panel active" id="ser-it-computers">
+
+        <div style="margin-bottom:60px; padding-bottom:60px; border-bottom:1px solid #e2e8f0">
+          <div class="sigrid">
+            <div>
+              <div class="sbox">
+                <img src="images/desktop_laptop.jpg" alt="Desktops &amp; Laptops"
+                  style="object-fit:cover;height:260px;width:100%"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="noimgmsg"
+                  style="display:none;background:var(--g1);align-items:center;justify-content:center;height:260px;border-radius:10px;border:1px solid #e2e8f0;flex-direction:column;gap:10px">
+                  <span style="font-size:40px">🖥️</span>
+                  <span style="font-size:14px;color:#666">images/desktop_laptop.jpg</span>
+                </div>
+              </div>
+            </div>
+            <div class="sdet">
+              <h2>💻 Desktops &amp; Laptops</h2>
+              <p>Custom-built workstations, branded desktops, and high-performance laptops for office and personal use.
+              </p>
+              <div class="stags"><span>Workstations</span><span>Laptops</span><span>Gaming PCs</span></div>
+              <ul class="sfeat">
+                <li>Latest processors from Intel and AMD</li>
+                <li>Custom RAM and SSD upgrades</li>
+                <li>Top brands: Dell, HP, Lenovo, Acer</li>
+                <li>Software installation and OS setup</li>
+              </ul>
+              <button class="bpri dark" onclick="prefillEnquiry('Desktops and Laptops')">📞 Call for Enquiry</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:60px; padding-bottom:60px; border-bottom:1px solid #e2e8f0">
+          <div class="sigrid">
+            <div>
+              <div class="sbox" style="background:#fff;border:1px solid #e2e8f0;padding:10px">
+                <img src="images/networking.jpg" alt="Networking Solutions"
+                  style="object-fit:cover;height:280px;width:100%"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="noimgmsg"
+                  style="display:none;background:var(--g1);align-items:center;justify-content:center;height:280px;border-radius:10px;border:1px solid #e2e8f0;flex-direction:column;gap:10px">
+                  <span style="font-size:40px">🖧</span>
+                  <span style="font-size:14px;color:#666">images/networking.jpg</span>
+                </div>
+                <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(13,71,161,0.85);color:white;padding:10px;font-size:12px;text-align:center;font-weight:600;letter-spacing:1px">
+                  SKYTECH ENTERPRISE NETWORKING
+                </div>
+              </div>
+            </div>
+            <div class="sdet">
+              <div class="seclb">Connectivity</div>
+              <h2>🖧 Networking Solutions</h2>
+              <p>End-to-end networking setup for small offices and corporate environments to ensure seamless
+                connectivity.</p>
+              <div class="stags"><span>LAN/WAN</span><span>Wi-Fi Setup</span><span>Server Rooms</span></div>
+              <ul class="sfeat">
+                <li>Structured cabling and router configuration</li>
+                <li>Switches, firewalls, and security implementation</li>
+                <li>Seamless Wi-Fi coverage solutions</li>
+                <li>CCTV and IP Camera integration</li>
+              </ul>
+              <button class="bpri dark" onclick="prefillEnquiry('Networking Solutions')">📞 Call for Enquiry</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:60px; padding-bottom:60px; border-bottom:1px solid #e2e8f0">
+          <div class="sigrid">
+            <div>
+              <div class="sbox" style="background:#fff;border:1px solid #e2e8f0;padding:10px">
+                <img src="images/printers.jpg" alt="Printers &amp; Peripherals"
+                  style="object-fit:cover;height:280px;width:100%"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="noimgmsg"
+                  style="display:none;background:var(--g1);align-items:center;justify-content:center;height:280px;border-radius:10px;border:1px solid #e2e8f0;flex-direction:column;gap:10px">
+                  <span style="font-size:40px">🖨️</span>
+                  <span style="font-size:14px;color:#666">images/printers.jpg</span>
+                </div>
+                <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(13,71,161,0.85);color:white;padding:10px;font-size:12px;text-align:center;font-weight:600;letter-spacing:1px">
+                  SKYTECH PRINTER REPAIR & SERVICE
+                </div>
+              </div>
+            </div>
+            <div class="sdet">
+              <div class="seclb">Office Automation</div>
+              <h2>🖨️ Printers &amp; Peripherals</h2>
+              <p>High-quality printing solutions and essential computer peripherals for maximum productivity.</p>
+              <div class="stags"><span>Laser Printers</span><span>Scanners</span><span>Accessories</span></div>
+              <ul class="sfeat">
+                <li>Laser, Inkjet, and Thermal printers</li>
+                <li>Top brands: Epson, HP, Canon, TVS</li>
+                <li>Cartridge refilling and hardware repair</li>
+                <li>Keyboards, mice, and essential office hardware</li>
+              </ul>
+              <button class="bpri dark" onclick="prefillEnquiry('Printers and Peripherals')">📞 Call for
+                Enquiry</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BATTERIES SECTION -->
+      <div class="service-panel" id="ser-it-batteries">
+        <div style="margin-bottom:60px; padding-bottom:60px; border-bottom:1px solid #e2e8f0">
+          <div class="sigrid">
+            <div>
+              <div class="sbox">
+                <img src="images/exide_battery.png" alt="Tubular Battery"
+                  style="object-fit:contain;height:260px;width:100%">
+              </div>
+            </div>
+            <div class="sdet">
+              <h2>🔋 Tubular Batteries</h2>
+              <p>Heavy-duty deep cycle tubular batteries designed for long backups and extended life. Perfect for home
+                inverters and solar systems.</p>
+              <div class="stags"><span>Long Life</span><span>Deep Cycle</span><span>Inverter Ready</span></div>
+              <ul class="sfeat">
+                <li>Available from 100 AH to 250 AH</li>
+                <li>Brands: Exide, Amaron, Microtek, Luminous</li>
+                <li>Up to 5 Years replacement warranty</li>
+                <li>Extremely low maintenance</li>
+              </ul>
+              <button class="bpri dark" onclick="prefillEnquiry('Tubular Batteries')">📞 Call for Enquiry</button>
+            </div>
+          </div>
+        </div>
+        <div style="margin-bottom:60px; padding-bottom:60px; border-bottom:1px solid #e2e8f0">
+          <div class="sigrid">
+            <div>
+              <div class="sbox">
+                <img src="images/SF_Sonic_battery.png" alt="SMF Battery"
+                  style="object-fit:contain;height:260px;width:100%">
+              </div>
+            </div>
+            <div class="sdet">
+              <h2>🔋 SMF / VRLA Batteries</h2>
+              <p>Sealed Maintenance Free (SMF) batteries offering leak-proof design and zero maintenance. Ideal for UPS
+                systems, servers, and telecom.</p>
+              <div class="stags"><span>Maintenance Free</span><span>Spill-Proof</span><span>UPS Ready</span></div>
+              <ul class="sfeat">
+                <li>Available in 7 AH up to 200 AH</li>
+                <li>Brands: SF Sonic, Okaya, Amaron Quanta</li>
+                <li>AGM technology for fast recharge</li>
+                <li>Safe for indoor server rooms</li>
+              </ul>
+              <button class="bpri dark" onclick="prefillEnquiry('SMF Batteries')">📞 Call for Enquiry</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STABILIZERS SECTION -->
+      <div class="service-panel" id="ser-it-stabilizers">
+        <div style="margin-bottom:60px; padding-bottom:60px; border-bottom:1px solid #e2e8f0">
+          <div class="sigrid">
+            <div>
+              <div class="sbox">
+                <img src="images/standard_servo_stabilizer.png" alt="Servo Stabilizer"
+                  style="object-fit:contain;height:260px;width:100%">
+              </div>
+            </div>
+            <div class="sdet">
+              <h2>📊 Standard Servo Stabilizers</h2>
+              <p>Precise voltage regulation for industrial machinery, commercial plants, and heavy loads. Ensures
+                equipment longevity by correcting severe voltage fluctuations.</p>
+              <div class="stags"><span>Single Phase</span><span>Three Phase</span><span>Industrial</span></div>
+              <ul class="sfeat">
+                <li>Capacity: 1 KVA to 500 KVA</li>
+                <li>Copper wound for high efficiency</li>
+                <li>Response time &lt; 20 ms</li>
+                <li>Overload and short-circuit protection</li>
+              </ul>
+              <button class="bpri dark" onclick="prefillEnquiry('Servo Stabilizers')">📞 Call for Enquiry</button>
+            </div>
+          </div>
+        </div>
+        <div style="margin-bottom:60px; padding-bottom:60px; border-bottom:1px solid #e2e8f0">
+          <div class="sigrid">
+            <div>
+              <div class="sbox">
+                <img src="images/Krykard_stabilizer.png" alt="Digital Stabilizer"
+                  style="object-fit:contain;height:260px;width:100%">
+              </div>
+            </div>
+            <div class="sdet">
+              <h2>📊 Digital / Static Stabilizers</h2>
+              <p>High-precision digital voltage protection using solid-state technology. Ideal for CNC machines, medical
+                equipment, and IT labs.</p>
+              <div class="stags"><span>Zero Moving Parts</span><span>Digital LCD</span><span>High Precision</span></div>
+              <ul class="sfeat">
+                <li>Brands: Krykard, Microtek</li>
+                <li>Instantaneous voltage correction</li>
+                <li>Microprocessor controlled logic</li>
+                <li>Digital display for input/output status</li>
+              </ul>
+              <button class="bpri dark" onclick="prefillEnquiry('Digital Stabilizers')">📞 Call for Enquiry</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIFT INVERTERS SECTION -->
+      <div class="service-panel" id="ser-it-inverters">
+        <div style="margin-bottom:60px; padding-bottom:60px; border-bottom:1px solid #e2e8f0">
+          <div class="sigrid">
+            <div>
+              <div class="sbox">
+                <img src="images/lift_inverter_1.png" alt="Lift Inverter"
+                  style="object-fit:contain;height:260px;width:100%">
+              </div>
+            </div>
+            <div class="sdet">
+              <h2>🔼 3-Phase Lift Inverters</h2>
+              <p>Specially designed for elevators and escalators to ensure passengers are never trapped during a power
+                cut. Smooth and safe operation with automatic rescue.</p>
+              <div class="stags"><span>3-Phase Power</span><span>Zero Jerk</span><span>Industrial Grade</span></div>
+              <ul class="sfeat">
+                <li>Capacity: 5 kVA to 50 kVA</li>
+                <li>Brands: Microtek, BPE, ARD</li>
+                <li>Automatic Rescue Device (ARD) functionality</li>
+                <li>Protects lift motors from voltage fluctuations</li>
+              </ul>
+              <button class="bpri dark" onclick="prefillEnquiry('Lift Inverters')">📞 Call for Enquiry</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AMC SECTION -->
+      <div class="service-panel" id="ser-it-amc">
+        <div style="margin-bottom:60px; padding-bottom:60px; border-bottom:1px solid #e2e8f0">
+          <div class="sigrid">
+            <div>
+              <div class="sbox">
+                <img src="images/amc_services.jpg" alt="AMC Services" style="object-fit:cover;height:260px;width:100%"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="noimgmsg"
+                  style="display:none;background:var(--g1);align-items:center;justify-content:center;height:260px;border-radius:10px;border:1px solid #e2e8f0;flex-direction:column;gap:10px">
+                  <span style="font-size:40px">🛠️</span>
+                  <span style="font-size:14px;color:#666">images/amc_services.jpg</span>
+                </div>
+              </div>
+            </div>
+            <div class="sdet">
+                <div class="seclb">Trusted Support</div>
+                <h2>🛠️ Annual Maintenance Contracts (AMC)</h2>
+                <p>Comprehensive and Non-Comprehensive maintenance services for IT hardware, UPS systems, and power
+                  backups. We ensure your business never faces unexpected downtime.</p>
+                
+                <div style="background:var(--bp);padding:20px;border-radius:10px;margin-bottom:20px;border-left:4px solid var(--bmi)">
+                  <div style="font-weight:700;color:var(--bm);margin-bottom:10px;font-size:15px">🏢 Elite Client Portfolio in Coimbatore</div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:13px;color:var(--g6)">
+                    <div>• Sri Krishna Institutions</div>
+                    <div>• Akshaya College</div>
+                    <div>• Kovai Kalaimagal College</div>
+                    <div>• Adithya Institutions</div>
+                    <div>• Bharathiar University</div>
+                    <div>• KIET (Karpagam)</div>
+                    <div>• Govt Polytechnic Coimbatore</div>
+                    <div>• PSG Institutions</div>
+                  </div>
+                </div>
+
+                <div class="stags"><span>24/7 Support</span><span>Preventive Maintenance</span><span>Genuine Parts</span></div>
+                <ul class="sfeat">
+                  <li>Regular preventive maintenance visits & priority breakdown support</li>
+                  <li>Covers Computers, Printers, UPS, and Networking gear</li>
+                  <li>Trained technicians with 15+ years experience</li>
+                  <li><strong>Dedicated Service Hotline:</strong> 99945 06370</li>
+                </ul>
+                <button class="bpri dark" onclick="prefillEnquiry('AMC Services')">📞 Call for Enquiry</button>
+              </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- ══════════════════════ REVIEWS ══════════════════════ -->
+  <article class="page" id="page-reviews">
+    <div class="phdr">
+      <h1>Ratings &amp; Reviews</h1>
+      <p>Live ratings — updates in real time</p>
+    </div>
+    <div class="sec">
+      <div id="rvwrap">
+        <div class="loading">⏳ Loading reviews...</div>
+      </div>
+      <div class="rform">
+        <h3>Write a Review</h3>
+        <p style="font-size:13px;color:#9aa5b4;margin-bottom:12px">Your rating updates live for everyone</p>
+        <div class="spick" id="spick">
+          <span onclick="setStars(1)">★</span><span onclick="setStars(2)">★</span>
+          <span onclick="setStars(3)">★</span><span onclick="setStars(4)">★</span>
+          <span onclick="setStars(5)">★</span>
+        </div>
+        <div class="frow">
+          <div class="fg"><label>Name *</label><input id="rvName" placeholder="Your name"></div>
+          <div class="fg"><label>Designation</label><input id="rvRole" placeholder="e.g. Factory Owner"></div>
+        </div>
+        <div class="fg"><label>Review * (min 10 chars)</label><textarea id="rvText"
+            placeholder="Share your experience..."></textarea></div>
+        <div id="rvErr" class="ferr" style="display:none"></div>
+        <button class="bsub" onclick="submitReview()">Submit Review</button>
+        <div class="fok" id="rvOk" style="display:none">✓ Review submitted! Live now.</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ══════════════════════ LIVE CHAT ══════════════════════ -->
+  <article class="page" id="page-chat">
+    <div class="phdr">
+      <h1>Live Chat</h1>
+      <p>Connect with our support team in real time</p>
+    </div>
+    <div class="sec">
+      <div class="chwrap">
+        <aside class="chsb">
+          <div id="joinBox">
+            <h3 style="margin-bottom:16px">Join the Chat</h3>
+            <div class="fg"><label>Your Name</label><input id="chatName" placeholder="Enter your name" maxlength="30">
+            </div>
+            <div class="fg"><label>Support Room</label>
+              <select id="chatRoom">
+                <option value="general">General Support</option>
+                <option value="sales">Sales Enquiry</option>
+                <option value="technical">Technical Support</option>
+              </select>
+            </div>
+            <button class="bsub" onclick="joinChat()">Join Chat →</button>
+          </div>
+          <div id="infoBox" style="display:none">
+            <div class="cubdg" id="cubdg"></div>
+            <div style="font-size:12px;color:#9aa5b4;margin-top:6px" id="crmbdg"></div>
+            <div style="font-size:12px;color:var(--ba);margin-top:6px" id="conlinec"></div>
+            <button class="bout" style="margin-top:12px;width:100%;padding:9px;border-color:var(--bmi);color:var(--bmi)"
+              onclick="leaveChat()">Leave Chat</button>
+          </div>
+        </aside>
+        <div class="chm">
+          <div class="chbar">
+            <span>Sky Tech Support Chat</span>
+            <span class="typi" id="typi" style="display:none">Someone is typing...</span>
+          </div>
+          <div class="chmsgs" id="chmsgs">
+            <div class="csys">Welcome to Sky Tech Power Systems Support. Join to start chatting.</div>
+          </div>
+          <div class="chinr" id="chinr" style="display:none">
+            <input id="chinput" placeholder="Type a message..." onkeydown="chatKey(event)" oninput="chatTyping()">
+            <button class="bsend" onclick="sendMsg()">Send ➤</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ══════════════════════ CONTACT ══════════════════════ -->
+  <article class="page" id="page-contact">
+    <div class="phdr">
+      <h1>Contact Us</h1>
+      <p>Get in touch for quotes and free site surveys</p>
+    </div>
+    <div class="sec">
+      <div class="cgrid2">
+        <div>
+          <div class="seclb">Get In Touch</div>
+          <div class="sectit">Sky Tech Power Systems</div>
+          <div class="ci">
+            <div class="ciico">📍</div>
+            <div>
+              <div class="cil">Address</div>
+              <div class="civ">5/270, Balaji Complex, 7th Street Ext,<br>Opp. Syndicate Bank, Gandhipuram,<br>Coimbatore
+                – 641012</div>
+            </div>
+          </div>
+          <div class="ci">
+            <div class="ciico">📞</div>
+            <div>
+              <div class="cil">Phone</div>
+              <div class="civ">+91-99945 06370</div>
+            </div>
+          </div>
+          <div class="ci">
+            <div class="ciico">✉</div>
+            <div>
+              <div class="cil">Email</div>
+              <div class="civ">skytechpowersystems@gmail.com</div>
+            </div>
+          </div>
+          <div class="ci">
+            <div class="ciico">🕐</div>
+            <div>
+              <div class="cil">Hours</div>
+              <div class="civ">Monday – Saturday: 9:00 AM – 9:00 PM</div>
+            </div>
+          </div>
+          <a class="mapbtn" href="https://maps.google.com/?q=Gandhipuram+Coimbatore" target="_blank">📍 Open Google Maps
+            →</a>
+        </div>
+        <div>
+          <div class="seclb">Send Enquiry</div>
+          <div class="sectit" style="font-size:22px">Make an Enquiry</div>
+          <div class="frow">
+            <div class="fg"><label>Full Name *</label><input id="cName" placeholder="Your name"></div>
+            <div class="fg"><label>Email</label><input type="email" id="cEmail" placeholder="your@email.com"></div>
+          </div>
+          <div class="fg"><label>Phone *</label><input type="tel" id="cPhone" placeholder="+91 XXXXX XXXXX"></div>
+          <div class="fg"><label>Service Required *</label>
+            <select id="cService">
+              <option value="">-- Select --</option>
+              <option>UPS</option>
+              <option>Solar System</option>
+              <option>Battery</option>
+              <option>Service/Repair</option>
+              <option>Installation</option>
+              <option>AMC</option>
+              <option>Lift Inverter</option>
+              <option>Voltage Stabilizer</option>
+              <option>Ongrid Solar</option>
+              <option>Offline Solar UPS</option>
+              <option>Solar Water Pumps</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="fg"><label>Message</label><textarea id="cMsg"
+              placeholder="Tell us your requirement..."></textarea></div>
+          <div id="cErr" class="ferr" style="display:none"></div>
+          <button class="bsub" onclick="submitEnquiry()">Submit Enquiry</button>
+          <div class="fok" id="cOk" style="display:none">✓ Enquiry submitted! Our team will contact you within 24 hours.
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ══════════════════════ LOGIN ══════════════════════ -->
+  <article class="page" id="page-login">
+    <div class="phdr">
+      <h1>My Account</h1>
+      <p>Login or register — JWT Auth (INT222 Unit V)</p>
+    </div>
+    <div class="sec" style="max-width:500px;margin:0 auto">
+      <div id="loggedOutDiv">
+        <div class="atabs">
+          <button class="atab active" onclick="swAuth('login',this)">Login</button>
+          <button class="atab" onclick="swAuth('register',this)">Register</button>
+        </div>
+        <div class="apanel active" id="auth-login">
+          <div class="fg"><label>Email</label><input type="email" id="lEmail" placeholder="your@email.com"></div>
+          <div class="fg"><label>Password</label><input type="password" id="lPass" placeholder="Password"></div>
+          <div id="lErr" class="ferr" style="display:none"></div>
+          <button class="bsub" onclick="doLogin()">Login →</button>
+        </div>
+        <div class="apanel" id="auth-register">
+          <div class="frow">
+            <div class="fg"><label>Full Name</label><input id="rName" placeholder="Your name"></div>
+            <div class="fg"><label>Phone</label><input id="rPhone" placeholder="+91 XXXXX"></div>
+          </div>
+          <div class="fg"><label>Email</label><input type="email" id="rEmail" placeholder="your@email.com"></div>
+          <div class="fg"><label>Password (min 6 chars)</label><input type="password" id="rPass" placeholder="Password">
+          </div>
+          <div id="rErr" class="ferr" style="display:none"></div>
+          <button class="bsub" onclick="doRegister()">Create Account →</button>
+        </div>
+      </div>
+      <div id="loggedInDiv" style="display:none;text-align:center;padding:30px 0">
+        <div style="font-size:60px;margin-bottom:12px">👤</div>
+        <div id="liName" style="font-size:20px;font-weight:600;margin-bottom:6px"></div>
+        <div id="liRole" style="font-size:13px;color:#9aa5b4;margin-bottom:8px"></div>
+        <div id="liEmail" style="font-size:13px;color:#9aa5b4;margin-bottom:24px"></div>
+        <button class="bpri dark" onclick="doLogout()">Logout</button>
+      </div>
+      <div id="authOk" class="fok" style="display:none;margin-top:12px"></div>
+    </div>
+  </article>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="fti">
+      <div class="fgrid">
+        <div class="fbrand">
+          <div class="fblogo">
+            <img src="images/logo skytech 1.png" alt="Sky Tech Logo" style="height:40px;width:auto;margin-bottom:10px">
+            <div style="font-family:var(--fh);font-size:20px;font-weight:700">
+              <span style="color:#29abe2">Sky Tech</span> <span style="color:#fff">Power Systems</span>
+            </div>
+          </div>
+          <p>Trusted power solutions partner in South India. Quality products, expert service, 24/7 support.</p>
+          <div class="fsocial">
+            <a href="https://youtu.be/MlT8XY-rYlY?si=YQyKuHvOnm-MH1uJ" target="_blank" class="fsoc" title="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="mailto:skytechpowersystems@gmail.com" class="fsoc" title="Mail"><i class="fas fa-envelope"></i></a>
+            <a href="tel:+919994506370" class="fsoc" title="Call"><i class="fas fa-phone"></i></a>
+          </div>
+        </div>
+        <div class="fcol">
+          <h4>Products</h4>
+          <button onclick="showPage('services', 'ups')">Online UPS</button>
+          <button onclick="showPage('services', 'ups')">Industrial UPS</button>
+          <button onclick="showPage('gallery', 'it-batteries')">Batteries</button>
+          <button onclick="showPage('gallery', 'it-stabilizers')">Stabilizers</button>
+          <button onclick="showPage('services', 'solar')">Solar Solutions</button>
+        </div>
+        <div class="fcol">
+          <h4>Quick Links</h4>
+          <button onclick="showPage('home')">Home</button>
+          <button onclick="showPage('about')">About Us</button>
+          <button onclick="showPage('gallery')">Our Work</button>
+          <button onclick="showPage('reviews')">Reviews</button>
+          <button onclick="showPage('chat')"><i class="fas fa-comment" style="font-size:12px;margin-right:5px"></i> Live Chat</button>
+        </div>
+        <div class="fcol">
+          <h4>Customer</h4>
+          <button onclick="showPage('contact')">Contact Us</button>
+          <button onclick="showPage('login')">My Account</button>
+          <button onclick="toast('Coming soon!')">Privacy Policy</button>
+          <button onclick="toast('Coming soon!')">Terms of Service</button>
+          <button onclick="toast('Coming soon!')">Refund Policy</button>
+        </div>
+      </div>
+    </div>
+    <div class="fbottom-bar">
+      <div class="fbottom-inner">
+        <div class="fbot-left">
+          © 2025 Sky Tech Power Systems. All rights reserved. | 5/270, Balaji Complex, Gandhipuram, Coimbatore – 641012
+        </div>
+        <div class="fbot-right">
+          <div class="gst-box">GST: 33EJNPS3002L1Z1</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- BPE PRODUCT SPEC MODAL -->
+  <div class="spec-modal-overlay" id="specModalOverlay" style="display:none"
+    onclick="if(event.target===this)closeSpecModal()">
+    <div class="spec-modal" id="specModal">
+      <div class="spec-modal-head">
+        <button class="spec-close" onclick="closeSpecModal()">✕</button>
+        <h2 id="smTitle">Product Specifications</h2>
+        <p id="smSubtitle">BPE MF Series — Online UPS</p>
+      </div>
+      <div class="spec-modal-body" id="smBody"></div>
+      <div class="spec-modal-footer">
+        <button class="bpri dark" style="flex:1"
+          onclick="prefillEnquiry(document.getElementById('smTitle').textContent);closeSpecModal()">📞 Call for
+          Enquiry</button>
+        <button class="bout" style="color:var(--bmi);border-color:var(--bmi);flex:1"
+          onclick="closeSpecModal()">Close</button>
+      </div>
+    </div>
+  </div>
+  <div class="toast" id="toastEl"></div>
+
+  <!-- ================================================================
+     JAVASCRIPT — INT219 Unit II–VI + INT222 Unit V (Socket.IO)
+     ================================================================ -->
+  <script>
+    'use strict'; // INT219 Unit V: strict mode
+
+    // ── ES6+ Constants (INT219 Unit II) ──────────────────────────
+    const API = '/api/v1';
+    const PER_PAGE = 6;
+
+    // ── State object (ES6 shorthand) ─────────────────────────────
+    const S = {
+      page: 'home', user: null,
+      token: localStorage.getItem('skt') || null,
+      stars: 0, prodCat: 'all', prodPage: 1,
+      joined: false, chatName: '', chatRoom: 'general',
+      tyTimer: null,
+      slides: {
+        ongrid: { cur: 0, tot: 16 }, offline: { cur: 0, tot: 4 }, pump: { cur: 0, tot: 1 },
+        'ups-online': { cur: 0, tot: 4 }, 'ups-offline': { cur: 0, tot: 5 },
+        'bat-tubular': { cur: 0, tot: 4 }, 'bat-smf': { cur: 0, tot: 3 },
+        'stab-servo': { cur: 0, tot: 3 }, 'stab-digital': { cur: 0, tot: 2 },
+      },
+      ongridPaths: Array.from({ length: 16 }, (_, i) => `images/ongrid_solar_${i + 1}.jfif`),
+      offlinePaths: [
+        'images/offline_solar_1.jfif', 'images/offline_solar_2.jfif', 'images/offline_solar_3.jfif',
+        'images/offline_solar_4.jfif'
+      ],
+      pumpPaths: ['images/solar_pump_1.jfif'],
+      'ups-onlinePaths': [
+        'images/Eaton_online_ups.png',
+        'images/emmerson_online_ups.png',
+        'images/bpe_ups.png',
+        'images/APC_online_ups.png'
+      ],
+      'ups-offlinePaths': [
+        'images/Microtek_ups.png',
+        'images/exide_ups.png',
+        'images/okaya_ups.png',
+        'images/apc_ups.png',
+        'images/Amaron_ups.png'
+      ],
+      'bat-tubularPaths': ['images/exide_battery.png', 'images/Amaron_battery.png', 'images/Microtek_battery.png', 'images/Okaya_battery.png'],
+      'bat-smfPaths': ['images/SF_Sonic_battery.png', 'images/Okaya_battery.png', 'images/Amaron_honda_battery.png'],
+      'stab-servoPaths': ['images/standard_servo_stabilizer.png', 'images/Krykard_stabilizer.png', 'images/microtek_stabilizer.png'],
+      'stab-digitalPaths': ['images/Krykard_stabilizer.png', 'images/microtek_stabilizer.png'],
+    };
+
+    // ── Local reviews store (since no backend in single file mode) ──
+    let localReviews = JSON.parse(localStorage.getItem('skt_reviews') || '[]');
+
+    // ── Local enquiries store ─────────────────────────────────────
+    let localEnquiries = JSON.parse(localStorage.getItem('skt_enqs') || '[]');
+
+    // ── Static products data ──────────────────────────────────────
+    const PRODUCTS = [
+      // ── Online UPS ──────────────────────────────────────────────
+      { id: 1, title: 'Eaton Online UPS', cat: 'online-ups', price: 'Price on Request', unit: '/Piece', badge: 'Top Brand', icon: '⚡', img: 'images/Eaton_online_ups.png', specs: ['Capacity: 1 kVA – 200 kVA', 'Brand: Eaton', 'Type: True Online Double Conversion', 'Input Voltage: 160–280V', 'Output: Pure Sine Wave', 'Efficiency: Up to 96%'] },
+      { id: 2, title: 'BPE Online UPS', cat: 'online-ups', price: 'Price on Request', unit: '/Piece', badge: 'Popular', icon: '⚡', img: 'images/bpe_ups.png', specs: ['Capacity: 1 kVA – 60 kVA', 'Brand: BPE', 'Technology: IGBT Based', 'Topology: Double Conversion', 'Battery: External SMF', 'Frequency: 50 Hz'] },
+      { id: 4, title: 'APC Online UPS', cat: 'online-ups', price: 'Price on Request', unit: '/Piece', icon: '⚡', img: 'images/APC_online_ups.png', specs: ['Capacity: 1 kVA – 120 kVA', 'Brand: APC Smart-UPS', 'Global Standard', 'Runtime: Scalable', 'Display: LCD Panel', 'Technology: Online Double Conversion'] },
+      { id: 40, title: 'Emerson / Vertiv Online UPS', cat: 'online-ups', price: 'Price on Request', unit: '/Piece', icon: '⚡', img: 'images/emmerson_online_ups.png', specs: ['Capacity: 10 kVA – 200 kVA', 'Brand: Emerson / Vertiv', 'High Efficiency Data Center UPS', 'Topology: Double Conversion', 'Efficiency: 96%', 'Suitable For: Server Rooms & Data Centers'] },
+      { id: 6, title: 'Microtek Online UPS', cat: 'online-ups', price: 'Price on Request', unit: '/Piece', icon: '⚡', img: 'images/Microtek_ups.png', specs: ['Capacity: 5.5 kVA – 80 kVA', 'Brand: Microtek', 'Trusted Indian Brand', 'Topology: Online Double Conversion', 'Input: 170–270V', 'Output Frequency: 50 Hz ± 0.1%'] },
+      { id: 7, title: 'Exide Online UPS', cat: 'online-ups', price: 'Price on Request', unit: '/Piece', icon: '⚡', img: 'images/exide_ups.png', specs: ['Capacity: 5.5 kVA – 80 kVA', 'Brand: Exide', 'Industry Leader', 'Type: Online Double Conversion', 'Battery: SMF/Tubular Compatible', 'Warranty: 1 Year'] },
+      { id: 19, title: 'Okaya Online UPS', cat: 'online-ups', price: 'Price on Request', unit: '/Piece', icon: '⚡', img: 'images/okaya_ups.png', specs: ['Capacity: 1 kVA – 40 kVA', 'Brand: Okaya', 'Pure Sine Wave Output', 'Technology: IGBT PWM', 'Input Range: 140–300V', 'Overload Protection: Yes'] },
+
+      // ── Offline UPS ──────────────────────────────────────────────
+      { id: 16, title: 'Microtek Offline UPS', cat: 'offline-ups', price: 'Price on Request', unit: '/Piece', icon: '🔌', img: 'images/Microtek_ups.png', specs: ['Capacity: 600VA – 2 kVA', 'Brand: Microtek', 'Home & Office Use', 'Transfer Time: < 10 ms', 'Output: Modified Sine Wave', 'Battery: Internal 12V'] },
+      { id: 17, title: 'Exide Offline UPS', cat: 'offline-ups', price: 'Price on Request', unit: '/Piece', icon: '🔌', img: 'images/exide_ups.png', specs: ['Capacity: 600VA – 1.5 kVA', 'Brand: Exide', 'Reliable Backup', 'Input: 160–270V', 'Overload Protection: Yes', 'Suitable For: Home & Small Office'] },
+      { id: 22, title: 'APC Back-UPS', cat: 'offline-ups', price: 'Price on Request', unit: '/Piece', icon: '🔌', img: 'images/apc_ups.png', specs: ['Capacity: 600VA – 1.5 kVA', 'Brand: APC', 'Voltage Regulation', 'Transfer Time: < 8 ms', 'USB Connectivity', 'AVR Built-in'] },
+      { id: 190, title: 'Okaya Offline UPS', cat: 'offline-ups', price: 'Price on Request', unit: '/Piece', icon: '🔌', img: 'images/okaya_ups.png', specs: ['Capacity: 600VA – 2 kVA', 'Brand: Okaya', 'Reliable Home Backup', 'Technology: Line Interactive', 'AVR Built-in: Yes', 'Output: Modified Sine Wave'] },
+      { id: 191, title: 'Mtech Offline UPS', cat: 'offline-ups', price: 'Price on Request', unit: '/Piece', icon: '🔌', img: 'images/Microtek_ups.png', specs: ['Capacity: 600VA – 1.5 kVA', 'Brand: Mtech', 'Energy Efficient', 'Compact Design', 'Automatic Charging: Yes', 'Overload Protection: Yes'] },
+
+      // ── Batteries ────────────────────────────────────────────────
+      { id: 8, title: 'Exide Tubular Battery 150 AH', cat: 'battery', price: '₹14,500', unit: '/Piece', icon: '🔋', img: 'images/exide_battery.png', specs: ['Type: Tall Tubular', 'Capacity: 150 AH', 'Brand: Exide', 'Warranty: 5 Years', 'Technology: Tubular Plate', 'Suitable For: Home Inverter & UPS'] },
+      { id: 25, title: 'Amaron Tubular Battery 165 AH', cat: 'battery', price: 'Price on Request', unit: '/Piece', icon: '🔋', img: 'images/Amaron_battery.png', specs: ['Type: Tubular', 'Capacity: 165 AH', 'Brand: Amaron', 'Warranty: 5 Years', 'Technology: Hi-Life Tubular', 'Low Maintenance, Fast Charging'] },
+      { id: 34, title: 'Amaron Honda Battery', cat: 'battery', price: 'Price on Request', unit: '/Piece', icon: '🔋', img: 'images/Amaron_honda_battery.png', specs: ['Type: VRLA / SMF', 'Brand: Amaron Honda', 'Maintenance Free', 'Application: UPS & Industrial', 'Long Service Life', 'Sealed Design'] },
+      { id: 35, title: 'Microtek Battery 150 AH', cat: 'battery', price: 'Price on Request', unit: '/Piece', icon: '🔋', img: 'images/Microtek_battery.png', specs: ['Type: Tubular', 'Capacity: 150 AH', 'Brand: Microtek', 'Warranty: 3.5 Years', 'Technology: Advanced Tubular', 'Low Self-Discharge'] },
+      { id: 27, title: 'Okaya SMF Battery', cat: 'battery', price: 'Price on Request', unit: '/Piece', icon: '🔋', img: 'images/Okaya_battery.png', specs: ['Type: SMF / VRLA', 'Brand: Okaya', 'Maintenance Free', 'Technology: AGM VRLA', 'Application: UPS & Telecom', 'Operating Temp: -15°C to 50°C'] },
+      { id: 36, title: 'SF Sonic SMF Battery', cat: 'battery', price: 'Price on Request', unit: '/Piece', icon: '🔋', img: 'images/SF_Sonic_battery.png', specs: ['Type: SMF Sealed', 'Brand: SF Sonic (Exide Group)', 'Maintenance Free', 'Application: UPS, Solar, Inverter', 'Voltage: 12V / Various AH', 'Spill-Proof Design'] },
+
+      // ── Stabilizers ──────────────────────────────────────────────
+      { id: 10, title: 'Standard Servo Stabilizer', cat: 'stabilizer', price: 'Price on Request', unit: '/Unit', icon: '📊', img: 'images/standard_servo_stabilizer.png', specs: ['Type: Servo Controlled', 'Phase: Single & Three Phase', 'Capacity: 1 KVA – 500 KVA', 'Voltage Range: 120V – 480V', 'Response Time: < 20 ms', 'Auto Voltage Regulation'] },
+      { id: 37, title: 'Krykard Digital Stabilizer', cat: 'stabilizer', price: 'Price on Request', unit: '/Unit', icon: '📊', img: 'images/Krykard_stabilizer.png', specs: ['Type: Static / Digital', 'Brand: Krykard', 'Phase: Single Phase', 'Capacity: 3 KVA – 10 KVA', 'Display: Digital LCD', 'Overvoltage & Short-Circuit Protection'] },
+      { id: 32, title: 'Microtek Stabilizer', cat: 'stabilizer', price: 'Price on Request', unit: '/Unit', icon: '📊', img: 'images/microtek_stabilizer.png', specs: ['Type: Digital Servo', 'Brand: Microtek', 'Phase: Single & Three Phase', 'Capacity: 2 KVA – 50 KVA', 'Input Range: 90V – 300V', 'Output: 220V ± 1%'] },
+
+      // ── Lift Inverters ────────────────────────────────────────────
+      { id: 11, title: 'Lift Inverter 10 KVA', cat: 'inverter', price: 'Price on Request', unit: '/Unit', icon: '🔼', img: 'images/lift_inverter.png', specs: ['Capacity: 10 kVA', 'Dedicated Lift Backup', 'Phase: 3 Phase Output', 'Battery: External Tubular / SMF', 'Runtime: Configurable', 'Protection: Overload & Short Circuit'] },
+      { id: 38, title: 'Microtek Lift Inverter', cat: 'inverter', price: 'Price on Request', unit: '/Unit', icon: '🔼', img: 'images/microtek_lift_inverter.png', specs: ['Capacity: 5 kVA – 20 kVA', 'Brand: Microtek', 'Pure Sine Wave Output', 'Input: 3 Phase', 'Protection: Short Circuit, Overload, Deep Discharge', 'Suitable For: Residential & Commercial Lifts'] },
+
+      // ── Solar ─────────────────────────────────────────────────────
+      { id: 9, title: 'Solar Water Pump 5 HP', cat: 'solar', price: 'Price on Request', unit: '/Unit', icon: '☀️', img: 'images/solar_pump_1.jfif', specs: ['Capacity: 5 HP', 'Application: Agriculture & Borewell', 'Zero Running Cost', 'Eligible: PM-KUSUM Subsidy', 'Suitable For: Drip Irrigation & Open Wells', 'Installation: Included'] },
+      { id: 31, title: 'Ongrid Solar System 3KW', cat: 'solar', price: 'Price on Request', unit: '/Unit', icon: '☀️', img: 'images/ongrid_solar_1.jfif', specs: ['System Type: Grid-Tied', 'Capacity: 3 KW', 'Bill Reduction: Up to 90%', 'Net Metering: Eligible', 'Subsidy: PM Surya Ghar', 'Panel Warranty: 25 Years'] },
+    ];// ════════════════════════════════════════════════════════════
+    //  SOCKET.IO — Real-time chat simulation
+    //  (When running with Node.js backend, real Socket.IO connects)
+    //  In standalone mode, we simulate local messaging
+    // ════════════════════════════════════════════════════════════
+    let socket = null;
+    const initSocket = () => {
+      // Try to connect to Socket.IO server (INT222 Unit V)
+      if (typeof io !== 'undefined') {
+        socket = io();
+        socket.on('connect', () => { console.log('🔌 Socket.IO connected:', socket.id); updateOnline(1); });
+        socket.on('user:joined', d => { appendSys(d.message); updateOnline(d.onlineCount); });
+        socket.on('message:receive', d => { appendMsg(d, d.name === S.chatName); });
+        socket.on('user:typing', d => { showTyping(d.name); });
+        socket.on('user:left', d => { appendSys(d.message); updateOnline(d.onlineCount); });
+        socket.on('rating:updated', () => { if (S.page === 'reviews') renderReviews(); toast('⭐ New review posted live!'); });
+        socket.on('admin:enquiry', d => { showLNotif(`📩 New enquiry from ${d.name}`); });
+        socket.on('disconnect', () => { console.log('❌ Socket disconnected'); });
+      } else {
+        // Standalone: simulate a bot response after delay (Promises + setTimeout)
+        console.log('💡 Running in standalone mode — Socket.IO simulation active');
+      }
+    };
+
+    // ════════════════════════════════════════════════════════════
+    //  NAVIGATION (INT219 Unit IV: DOM Manipulation)
+    // ════════════════════════════════════════════════════════════
+    const showPage = (id, subId = null) => {
+      let targetId = id;
+      // Redirect virtual pages to their main containers
+      if (id === 'solar' || id === 'ups') targetId = 'services';
+      
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nvlinks button').forEach(b => b.classList.remove('active'));
+      
+      const pg = document.getElementById(`page-${targetId}`);
+      if (pg) pg.classList.add('active');
+      
+      const nb = document.getElementById(`nav-${targetId}`);
+      if (nb) nb.classList.add('active');
+      
+      S.page = targetId;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      const init = {
+        home: () => renderFeatured(), 
+        products: () => loadProds(S.prodCat),
+        reviews: renderReviews, 
+        gallery: () => {
+          buildGallery();
+          if (subId) {
+            const btn = pg.querySelector(`.stab[onclick*="'${subId}'"]`);
+            if (btn) switchService(subId, btn);
+          }
+        },
+        services: () => {
+          if (subId || id === 'solar' || id === 'ups') {
+            const sid = subId || id;
+            const btn = pg.querySelector(`.stab[onclick*="'${sid}'"]`);
+            if (btn) switchService(sid, btn);
+          }
+        },
+        login: checkLogin
+      };
+      
+      if (init[targetId]) init[targetId]();
+    };
+
+    const toggleNav = () => document.getElementById('mnav')?.classList.toggle('open');
+    const closeMnav = () => document.getElementById('mnav')?.classList.remove('open');
+
+    // ════════════════════════════════════════════════════════════
+    //  COUNTER ANIMATION (INT219 Unit II: Control flow, setTimeout)
+    // ════════════════════════════════════════════════════════════
+    const animCounters = () => {
+      const targets = [{ id: 'c1', val: 1500, suf: '+' }, { id: 'c2', val: 15, suf: '+' }, { id: 'c3', val: 200, suf: '+' }, { id: 'c4', val: 98, suf: '%' }];
+      targets.forEach(({ id, val, suf }) => {
+        let cur = 0;
+        const inc = Math.ceil(val / 60);
+        const el = document.getElementById(id);
+        if (!el) return;
+        const update = () => {
+          cur = Math.min(cur + inc, val);
+          el.textContent = cur + suf;
+          if (cur < val) setTimeout(update, 30); // Callback (INT222 Unit I)
+        };
+        update();
+      });
+    };
+
+    // ════════════════════════════════════════════════════════════
+    //  PRODUCTS (INT219 Unit II: Arrays, map, filter)
+    // ════════════════════════════════════════════════════════════
+
+    // Arrow function with default param (ES6+)
+    const loadProds = (cat = 'all', pgNum = 1) => {
+      if (typeof pgNum === 'object') {
+        document.querySelectorAll('#pflts .pfbtn').forEach(b => b.classList.remove('active'));
+        pgNum.classList.add('active');
+        pgNum = 1;
+      }
+      S.prodCat = cat; S.prodPage = pgNum;
+      const grid = document.getElementById('prodGrid');
+      if (!grid) return;
+      // Array.filter() (INT219 Unit II)
+      const items = cat === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cat === cat);
+      const total = items.length;
+      const pages = Math.ceil(total / PER_PAGE);
+      const slice = items.slice((pgNum - 1) * PER_PAGE, pgNum * PER_PAGE);
+      // Array.map() → HTML string (INT219 Unit II)
+      grid.innerHTML = slice.map(pCard).join('');
+      renderPgn('prodPgn', pgNum, pages, p => `loadProds('${cat}',${p})`);
+    };
+
+    const renderFeatured = () => {
+      const g = document.getElementById('featGrid');
+      if (!g) return;
+      // Curated mix showcasing real brand images
+      const featuredIds = [1, 25, 10]; // Eaton UPS, Amaron Battery, Servo Stabilizer
+      const items = PRODUCTS.filter(p => featuredIds.includes(p.id));
+      g.innerHTML = items.map(pCard).join('');
+    };
+
+    // Template literal + destructuring (INT219 Unit III: ES6+)
+    const pCard = (p) => {
+      const { id, title, price, unit = '', badge, icon = '⚡', img, specs, brand, model, detail } = p;
+      const safeTitle = title.replace(/'/g, "\\'");
+      const specHTML = specs.slice(0, 4).map(s => `<li>${s}</li>`).join('');
+      const brandBadge = (brand === 'BPE' || brand === 'Eaton' || brand === 'APC') ? `<span style="background:var(--bp);color:var(--bmi);font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;margin-left:4px;border:1px solid var(--bmi)">${brand}</span>` : '';
+
+      return `<div class="pcard" id="pc-${id}">
+    <div class="pimg" style="height:200px;background:linear-gradient(135deg,#f0f7ff,#dbeeff);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative">
+      ${img ? `<img src="${img}" alt="${title}" loading="lazy" style="width:100%;height:100%;object-fit:contain;padding:12px;transition:transform .3s" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">` : `<div style="font-size:54px;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.12))">${icon}</div>`}
+      ${badge ? `<span class="pbdg">${badge}</span>` : ''}
+    </div>
+    <div class="pbody">
+      <div class="ptit">${title}${brandBadge}</div>
+      ${model ? `<div style="font-size:11px;color:var(--g4);margin-bottom:4px">Model: ${model}</div>` : ''}
+      <div class="pprc">${price} <span style="font-size:12px;font-weight:400;color:#9aa5b4">${unit}</span></div>
+      <ul class="pspc" style="min-height:80px">${specHTML}</ul>
+      ${specs.length > 4 ? `<div style="font-size:11px;color:var(--bmi);margin-top:4px;cursor:pointer" onclick="showSpecModal(${id})">+${specs.length - 4} more specs →</div>` : ''}
+    </div>
+    <div class="pfoot">
+      ${detail ? `<button class="bq" style="background:var(--bd)" onclick="showSpecModal(${id})">📄 Full Specs</button>` : ''}
+      <button class="bq" onclick="prefillEnquiry('${safeTitle}')">📞 Call for Enquiry</button>
+    </div>
+  </div>`;
+    };
+
+    // Closure: pagination renderer (INT219 Unit III)
+    const renderPgn = (id, cur, total, getClickStr) => {
+      const el = document.getElementById(id);
+      if (!el || total <= 1) { if (el) el.innerHTML = ''; return; }
+      let h = `<button class="pgbtn" onclick="${getClickStr(cur - 1)}" ${cur === 1 ? 'disabled' : ''}>← Prev</button>`;
+      for (let i = 1; i <= total; i++) h += `<button class="pgbtn${i === cur ? ' active' : ''}" onclick="${getClickStr(i)}">${i}</button>`;
+      h += `<button class="pgbtn" onclick="${getClickStr(cur + 1)}" ${cur === total ? 'disabled' : ''}>Next →</button>`;
+      el.innerHTML = h;
+    };
+
+    const goProducts = (cat) => {
+      S.prodCat = cat; showPage('products');
+      setTimeout(() => {
+        document.querySelectorAll('.pfbtn').forEach(b => b.classList.remove('active'));
+        const btn = [...document.querySelectorAll('.pfbtn')].find(b => b.onclick?.toString().includes(`'${cat}'`));
+        if (btn) btn.classList.add('active');
+        loadProds(cat);
+      }, 60);
+    };
+
+    // ════════════════════════════════════════════════════════════
+    //  SOLAR SLIDESHOW (INT219 Unit II: Arrays, DOM events)
+    // ════════════════════════════════════════════════════════════
+    // Get paths for each solar category
+    const getSlidePaths = (cat) => {
+      return S[`${cat}Paths`] || [];
+    };
+
+    // Build thumbnail dots for each slideshow
+    const buildThumbs = (cat) => {
+      const wrap = document.getElementById(`thumbs-${cat}`);
+      if (!wrap) return;
+      const paths = getSlidePaths(cat);
+      wrap.innerHTML = paths.map((_, i) =>
+        `<span class="sthumb${i === 0 ? ' active' : ''}" onclick="goSlide('${cat}',${i})">${i + 1}</span>`
+      ).join('');
+    };
+
+    // Jump to specific slide
+    const goSlide = (cat, idx) => {
+      const s = S.slides[cat];
+      if (!s) return;
+      s.cur = idx;
+      updateSlide(cat);
+    };
+
+    // Update slide display
+    const updateSlide = (cat) => {
+      const s = S.slides[cat];
+      const paths = getSlidePaths(cat);
+      if (!s || !paths.length) return;
+
+      const img = document.getElementById(`${cat}-img`);
+      const ph = document.getElementById(`${cat}-ph`);
+      const fname = document.getElementById(`${cat}-fname`);
+      const cnt = document.getElementById(`sc-${cat}`);
+      const thumbs = document.querySelectorAll(`#thumbs-${cat} .sthumb`);
+
+      const src = paths[s.cur];
+      if (img) {
+        img.style.display = 'block';
+        img.src = src;
+        img.onerror = () => {
+          img.style.display = 'none';
+          if (ph) { ph.style.display = 'flex'; if (fname) fname.textContent = src; }
+        };
+        if (ph) ph.style.display = 'none';
+      }
+      if (cnt) cnt.textContent = `${s.cur + 1} / ${s.tot}`;
+      thumbs.forEach((t, i) => t.classList.toggle('active', i === s.cur));
+    };
+
+    const scrollToUps = (sectionId, btn) => {
+      // Highlight active tab
+      btn.closest('.stabs').querySelectorAll('.stab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // Scroll to section
+      const el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    const switchService = (id, btn) => {
+      const page = btn.closest('.page') || document;
+      page.querySelectorAll('.main-services-tabs .stab').forEach(b => b.classList.remove('active'));
+      page.querySelectorAll('.service-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      const target = document.getElementById(`ser-${id}`);
+      if (target) {
+        target.classList.add('active');
+        if (id === 'ups') {
+          // Initialize default UPS sub-tab
+          const defaultTab = target.querySelector('.stab.active') || target.querySelector('.stab');
+          if (defaultTab) {
+            const oc = defaultTab.getAttribute('onclick') || "";
+            const m = oc.match(/['"]([^'"]+)['"]/g);
+            if (m && m.length >= 2) {
+              const modelId = m[1].replace(/['"]/g, '');
+              switchModel('ups', modelId, defaultTab);
+            }
+          }
+        }
+      }
+    };
+
+    const switchModel = (prefix, id, btn) => {
+      if (!id) return;
+      const fullId = prefix ? `${prefix}-${id}` : id;
+      const target = document.getElementById(fullId) || document.getElementById(`sp-${id}`);
+      if (!target) return;
+
+      const container = (btn && btn.closest('.sec')) || (btn && btn.closest('.service-panel')) || target.parentElement || document;
+      
+      // Hide all panels for this page/group
+      container.querySelectorAll('.spanel').forEach(p => p.classList.remove('active'));
+      
+      if (btn) {
+        const tabsContainer = btn.closest('.stabs');
+        if (tabsContainer) {
+          tabsContainer.querySelectorAll('.stab').forEach(b => b.classList.remove('active'));
+        }
+        btn.classList.add('active');
+      }
+
+      target.classList.add('active');
+
+      // Init this specific slideshow
+      buildThumbs(fullId);
+      updateSlide(fullId);
+      if (id === 'pump') initPumpVideo();
+    };
+
+    const slideNav = (cat, dir) => {
+
+      const s = S.slides[cat];
+      if (!s) return;
+      s.cur = (s.cur + dir + s.tot) % s.tot;
+      updateSlide(cat);
+    };
+
+    // Check video availability and show fallback if missing
+    const initPumpVideo = () => {
+      const vid = document.getElementById('pumpVideo');
+      const fb = document.getElementById('vfb');
+      if (!vid || !fb) return;
+      // If video can't load, show fallback after 2s
+      vid.addEventListener('error', () => {
+        vid.style.display = 'none';
+        fb.style.display = 'block';
+      });
+      // Check if source exists by trying to load metadata
+      vid.addEventListener('loadedmetadata', () => {
+        vid.style.display = 'block';
+        fb.style.display = 'none';
+      });
+    };
+
+
+    // Map switchSolar back to switchModel for backward compatibility or direct calls
+    const switchSolar = (id, btn) => switchModel('', id, btn);
+
+    const loadStep = (step, btn) => {
+      const steps = { 1: 'online-ups', 2: 'offline-ups', 3: 'battery', 4: 'stabilizer', 5: 'inverter', 6: 'solar' };
+      const cat = steps[step];
+      if (cat) loadProds(cat);
+      // Highlight the correct number
+      document.querySelectorAll('.pgn .pfbtn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    };
+
+
+    // ════════════════════════════════════════════════════════════
+    //  GALLERY (INT219 Unit IV: createElement, appendChild)
+    // ════════════════════════════════════════════════════════════
+    const WORKS = [
+      { l: 'On-Grid Solar Installation 1', c: 'solar', img: 'images/ongrid_solar_1.jfif' },
+      { l: 'On-Grid Solar Installation 2', c: 'solar', img: 'images/ongrid_solar_2.jfif' },
+      { l: 'On-Grid Solar Installation 3', c: 'solar', img: 'images/ongrid_solar_3.jfif' },
+      { l: 'On-Grid Solar Installation 4', c: 'solar', img: 'images/ongrid_solar_4.jfif' },
+      { l: 'On-Grid Solar Installation 5', c: 'solar', img: 'images/ongrid_solar_5.jfif' },
+      { l: 'On-Grid Solar Installation 6', c: 'solar', img: 'images/ongrid_solar_6.jfif' },
+      { l: 'On-Grid Solar Installation 7', c: 'solar', img: 'images/ongrid_solar_7.jfif' },
+      { id: 'v1', l: 'Solar Pump Video Project', c: 'solar', ico: '📹', vid: 'images/solar_pump_video.mp4' },
+      { l: 'Offline Solar Setup 1', c: 'solar', img: 'images/offline_solar_1.jfif' },
+      { l: 'Offline Solar Setup 2', c: 'solar', img: 'images/offline_solar_1.jfif' },
+      { l: 'Solar Water Pump System', c: 'solar', img: 'images/solar_pump_1.jfif' },
+      { l: 'Industrial Online UPS', c: 'ups', img: 'images/eaton_ups.png' },
+      { l: 'Bank UPS Installation', c: 'ups', img: 'images/apc_ups.png' },
+      { l: 'Battery Bank Setup', c: 'batteries', img: 'images/exide_battery.png' },
+      { l: 'Apartment Lift Inverter', c: 'inverter', img: 'images/ups_gen_1.png' },
+    ];
+    const buildGallery = (f = 'all') => {
+      const g = document.getElementById('wgrid');
+      if (!g) return;
+      g.innerHTML = '';
+      // Array.filter + forEach (INT219 Unit II)
+      const items = f === 'all' ? WORKS : WORKS.filter(w => w.c === f);
+      items.forEach((item, i) => {
+        // createElement (INT219 Unit IV: DOM manipulation)
+        const el = document.createElement('div');
+        el.className = 'witem';
+        if (item.img) {
+          el.style.backgroundImage = `url('${item.img}')`;
+          el.style.backgroundSize = 'cover';
+          el.style.backgroundPosition = 'center';
+        } else if (item.vid) {
+          el.style.background = '#000';
+          el.innerHTML += `<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:40px;color:rgba(255,255,255,0.7)">▶</div>`;
+        } else {
+          el.style.background = `linear-gradient(135deg,hsl(${180 + i * 14},60%,18%),hsl(${200 + i * 10},70%,32%))`;
+        }
+        el.innerHTML += `${item.ico ? `<div class="wiico">${item.ico}</div>` : ''}<div class="wilbl">${item.l}</div><div class="wovl">${item.vid ? 'Play' : 'View'} ↗</div>`;
+        // Event listener (INT219 Unit II: Event handling)
+        el.addEventListener('click', () => {
+          if (item.vid) window.open(item.vid, '_blank');
+          else if (item.img) window.open(item.img, '_blank');
+          else toast(`📷 ${item.l} — add real photos to /images/ folder`);
+        });
+        g.appendChild(el);
+      });
+    };
+    const filterWork = (cat, btn) => {
+      document.querySelectorAll('.wfbtn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      buildGallery(cat);
+    };
+
+    // ════════════════════════════════════════════════════════════
+    //  REVIEWS — Closure + localStorage (INT219 Unit III)
+    // ════════════════════════════════════════════════════════════
+    const renderReviews = () => {
+      const wrap = document.getElementById('rvwrap');
+      if (!wrap) return;
+      const reviews = JSON.parse(localStorage.getItem('skt_reviews') || '[]');
+      const total = reviews.length;
+
+      // Show empty state if no reviews yet
+      if (total === 0) {
+        wrap.innerHTML = `<div style="text-align:center;padding:48px 24px;background:var(--bp);border-radius:12px;margin-bottom:30px">
+      <div style="font-size:48px;margin-bottom:12px">⭐</div>
+      <div style="font-family:var(--fh);font-size:22px;font-weight:700;color:var(--bm);margin-bottom:8px">No Reviews Yet</div>
+      <p style="color:var(--g6);font-size:14px">Be the first to share your experience with Sky Tech Power Systems!<br>Submit a review below and it will appear here.</p>
+    </div>`;
+        return;
+      }
+      // Array.reduce() (INT219 Unit II)
+      const sumStars = reviews.reduce((a, r) => a + r.stars, 0);
+      const avg = total ? (sumStars / total).toFixed(1) : '0.0';
+      const counts = [0, 0, 0, 0, 0];
+      reviews.forEach(r => { counts[r.stars - 1]++; });
+      // Array spread + map (ES6+)
+      const starsHtml = [...Array(5)].map((_, i) => i < Math.round(avg) ? '★' : '☆').join('');
+      const barsHtml = [5, 4, 3, 2, 1].map(s => {
+        const pct = total ? Math.round(counts[s - 1] / total * 100) : 0;
+        return `<div class="rrow"><span class="rrlb">${s} ★</span><div class="rrtr"><div class="rrfl" style="width:${pct}%"></div></div><span class="rrcnt">${counts[s - 1]}</span></div>`;
+      }).join('');
+      // Template literals (INT219 Unit III: ES6+)
+      const rvHtml = [...reviews].reverse().map(r => {
+        const st = [...Array(5)].map((_, i) => i < r.stars ? '★' : '☆').join('');
+        return `<div class="rvcard"><div class="rvhdr"><div><div class="rvnm">${r.name}</div><div class="rvrole">${r.role || 'Customer'}</div></div><div class="rvst">${st}</div></div><div class="rvtxt">${r.text}</div><div class="rvdt">${r.date}</div></div>`;
+      }).join('');
+      wrap.innerHTML = `<div class="rwrap"><div class="rsum"><div class="rbig">${avg}</div><div class="rstbig">${starsHtml}</div><div class="rcnt">${total} reviews</div><div class="rbrw" style="margin-top:14px;text-align:left">${barsHtml}</div></div><div class="rvlist">${rvHtml}</div></div>`;
+    };
+
+    const setStars = (v) => {
+      S.stars = v;
+      document.querySelectorAll('#spick span').forEach((s, i) => s.classList.toggle('lit', i < v));
+    };
+
+    const submitReview = async () => {
+      const name = document.getElementById('rvName')?.value.trim();
+      const role = document.getElementById('rvRole')?.value.trim();
+      const text = document.getElementById('rvText')?.value.trim();
+      const errEl = document.getElementById('rvErr');
+      if (!name || !text || !S.stars) {
+        if (errEl) { errEl.textContent = 'Please enter your name, select stars, and write a review.'; errEl.style.display = 'block'; } return;
+      }
+      if (text.length < 10) {
+        if (errEl) { errEl.textContent = 'Review must be at least 10 characters.'; errEl.style.display = 'block'; } return;
+      }
+      if (errEl) errEl.style.display = 'none';
+
+      // Try to POST to API (async/await — INT219 Unit III)
+      try {
+        const res = await fetch(`${API}/reviews`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, role, stars: S.stars, text }) });
+        if (!res.ok) throw new Error('API unavailable');
+      } catch {
+        // Fallback: save locally (localStorage)
+        const reviews = JSON.parse(localStorage.getItem('skt_reviews') || '[]');
+        reviews.push({ name, role: role || 'Customer', stars: S.stars, text, date: new Date().toLocaleDateString('en-IN', { month: 'short', year: 'numeric' }) });
+        localStorage.setItem('skt_reviews', JSON.stringify(reviews));
+      }
+
+      // Emit via Socket.IO if connected (INT222 Unit V)
+      socket?.emit('rating:new', { name, stars: S.stars });
+
+      // Reset form — Array.forEach (INT219 Unit II)
+      ['rvName', 'rvRole', 'rvText'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+      S.stars = 0; setStars(0);
+      const ok = document.getElementById('rvOk');
+      if (ok) { ok.style.display = 'block'; setTimeout(() => ok.style.display = 'none', 4000); }
+      renderReviews();
+      toast('⭐ Review submitted!');
+    };
+
+    // ════════════════════════════════════════════════════════════
+    //  ENQUIRY FORM — POST (INT222 Unit III: Express POST route)
+    // ════════════════════════════════════════════════════════════
+    const submitEnquiry = async () => {
+      const name = document.getElementById('cName')?.value.trim();
+      const email = document.getElementById('cEmail')?.value.trim();
+      const phone = document.getElementById('cPhone')?.value.trim();
+      const service = document.getElementById('cService')?.value;
+      const message = document.getElementById('cMsg')?.value.trim();
+      const errEl = document.getElementById('cErr');
+      // Validation (INT219 Unit II: Control flow)
+      if (!name || !phone || !service) {
+        if (errEl) { errEl.textContent = 'Please fill in Name, Phone, and select a Service.'; errEl.style.display = 'block'; } return;
+      }
+      if (!/^[\d\s\+\-]{7,15}$/.test(phone)) {
+        if (errEl) { errEl.textContent = 'Please enter a valid phone number.'; errEl.style.display = 'block'; } return;
+      }
+      if (errEl) errEl.style.display = 'none';
+      const body = { name, email, phone, service, message, date: new Date().toISOString() };
+      // Async/await fetch (INT219 Unit III: Promises)
+      try {
+        const r = await fetch(`${API}/enquiry`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        if (!r.ok) throw new Error();
+      } catch {
+        // Save locally as fallback
+        const enqs = JSON.parse(localStorage.getItem('skt_enqs') || '[]');
+        enqs.push(body); localStorage.setItem('skt_enqs', JSON.stringify(enqs));
+        console.log('📋 Enquiry saved locally (Owner view):', body);
+      }
+      socket?.emit('enquiry:submit', { name, service });
+      ['cName', 'cEmail', 'cPhone', 'cMsg'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+      document.getElementById('cService').value = '';
+      const ok = document.getElementById('cOk');
+      if (ok) { ok.style.display = 'block'; setTimeout(() => ok.style.display = 'none', 5000); }
+      toast('✅ Enquiry submitted! We will contact you soon.');
+    };
+
+    const prefillEnquiry = (service) => {
+      showPage('contact');
+      setTimeout(() => {
+        const sel = document.getElementById('cService');
+        const msg = document.getElementById('cMsg');
+        if (sel) { const opt = [...sel.options].find(o => o.value && service.toLowerCase().includes(o.value.toLowerCase())); if (opt) sel.value = opt.value; else sel.value = 'Other'; }
+        if (msg) msg.value = `I am interested in: ${service}`;
+      }, 100);
+    };
+
+    // ════════════════════════════════════════════════════════════
+    //  AUTH — JWT (INT222 Unit V)
+    // ════════════════════════════════════════════════════════════
+    const doLogin = async () => {
+      const email = document.getElementById('lEmail')?.value.trim();
+      const password = document.getElementById('lPass')?.value;
+      const err = document.getElementById('lErr');
+      if (!email || !password) { if (err) { err.textContent = 'Email and password are required.'; err.style.display = 'block'; } return; }
+      if (err) err.style.display = 'none';
+      try {
+        // POST to Express auth route (INT222 Unit III)
+        const r = await fetch(`${API}/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password }) });
+        const d = await r.json();
+        if (!r.ok) throw new Error(d.error || 'Login failed');
+        // Store JWT (INT219 Unit IV: localStorage browser API)
+        S.token = d.token; S.user = d.user;
+        localStorage.setItem('skt', d.token);
+        localStorage.setItem('skt_user', JSON.stringify(d.user));
+        toast(`✅ Welcome back, ${d.user.name}!`);
+        checkLogin();
+      } catch (e) {
+        // Demo mode: simulate login
+        const demoUser = { name: 'Demo User', email, role: 'user' };
+        S.user = demoUser; localStorage.setItem('skt_user', JSON.stringify(demoUser));
+        toast('✅ Demo login successful!');
+        checkLogin();
+      }
+    };
+
+    const doRegister = async () => {
+      const name = document.getElementById('rName')?.value.trim();
+      const phone = document.getElementById('rPhone')?.value.trim();
+      const email = document.getElementById('rEmail')?.value.trim();
+      const password = document.getElementById('rPass')?.value;
+      const err = document.getElementById('rErr');
+      if (!name || !email || !password) { if (err) { err.textContent = 'Name, email, and password are required.'; err.style.display = 'block'; } return; }
+      if (password.length < 6) { if (err) { err.textContent = 'Password must be at least 6 characters.'; err.style.display = 'block'; } return; }
+      if (err) err.style.display = 'none';
+      try {
+        const r = await fetch(`${API}/auth/register`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, email, password, phone }) });
+        const d = await r.json();
+        if (!r.ok) throw new Error(d.error || 'Registration failed');
+        S.token = d.token; S.user = d.user;
+        localStorage.setItem('skt', d.token);
+        localStorage.setItem('skt_user', JSON.stringify(d.user));
+        const ok = document.getElementById('authOk');
+        if (ok) { ok.textContent = `✅ Account created! Welcome, ${d.user.name}`; ok.style.display = 'block'; }
+        checkLogin();
+      } catch {
+        const u = { name, email, role: 'user' };
+        S.user = u; localStorage.setItem('skt_user', JSON.stringify(u));
+        const ok = document.getElementById('authOk');
+        if (ok) { ok.textContent = `✅ Account created! Welcome, ${name}`; ok.style.display = 'block'; }
+        checkLogin(); toast('✅ Account created!');
+      }
+    };
+
+    const doLogout = async () => {
+      try { await fetch(`${API}/auth/logout`, { method: 'POST', headers: { 'Authorization': `Bearer ${S.token}` } }); } catch { }
+      S.token = null; S.user = null;
+      localStorage.removeItem('skt'); localStorage.removeItem('skt_user');
+      toast('Logged out.'); checkLogin();
+    };
+
+    const checkLogin = () => {
+      const stored = localStorage.getItem('skt_user');
+      const user = stored ? JSON.parse(stored) : null;
+      const out = document.getElementById('loggedOutDiv');
+      const inn = document.getElementById('loggedInDiv');
+      if (!out || !inn) return;
+      if (user) {
+        S.user = user;
+        out.style.display = 'none'; inn.style.display = 'block';
+        const ne = document.getElementById('liName');
+        const re = document.getElementById('liRole');
+        const ee = document.getElementById('liEmail');
+        if (ne) ne.textContent = user.name;
+        if (re) re.textContent = `Role: ${user.role || 'user'}`;
+        if (ee) ee.textContent = user.email || '';
+        const sb = document.querySelector('.shop-btn');
+        if (sb) sb.textContent = `👤 ${(user.name || '').split(' ')[0]}`;
+      } else {
+        out.style.display = 'block'; inn.style.display = 'none';
+      }
+    };
+
+    const swAuth = (id, btn) => {
+      document.querySelectorAll('.apanel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.atab').forEach(b => b.classList.remove('active'));
+      document.getElementById(`auth-${id}`)?.classList.add('active');
+      btn.classList.add('active');
+    };
+
+    // ════════════════════════════════════════════════════════════
+    //  LIVE CHAT (INT222 Unit V: Socket.IO messaging)
+    // ════════════════════════════════════════════════════════════
+    const joinChat = () => {
+      const name = document.getElementById('chatName')?.value.trim();
+      const room = document.getElementById('chatRoom')?.value;
+      if (!name) { toast('Please enter your name.'); return; }
+      S.chatJoined = true; S.chatName = name; S.chatRoom = room;
+      // Emit join (Socket.IO — INT222 Unit V)
+      socket?.emit('user:join', { name, room });
+
+      // DOM updates (INT219 Unit IV)
+      document.getElementById('joinBox').style.display = 'none';
+      document.getElementById('infoBox').style.display = 'block';
+      document.getElementById('chinr').style.display = 'flex';
+      document.getElementById('cubdg').textContent = `👤 ${name}`;
+      document.getElementById('crmbdg').textContent = `Room: ${room}`;
+      updateOnline(1);
+
+      // If no socket (standalone), show welcome msg + bot
+      if (!socket) {
+        appendSys(`${name} joined the chat`);
+        setTimeout(() => {
+          appendMsg({ name: 'Sky Tech Bot', message: 'Hello! How can we help you today? Ask about UPS, Solar, or Batteries.', timestamp: new Date() }, false);
+        }, 800);
+      }
+    };
+
+    const leaveChat = () => {
+      S.chatJoined = false;
+      socket?.emit('user:leave', { name: S.chatName, room: S.chatRoom });
+      document.getElementById('joinBox').style.display = 'block';
+      document.getElementById('infoBox').style.display = 'none';
+      document.getElementById('chinr').style.display = 'none';
+      document.getElementById('chatName').value = '';
+    };
+
+    // ── Local AI Knowledge Base (mirrors server AI) ─────────────
+    const LOCAL_AI_KB = {
+      ups: {
+        kw: ['ups', 'uninterruptible', 'online ups', 'offline ups'],
+        products: [{ n: 'Online UPS 6 KVA', p: '₹78,000', b: 'Numeric', s: 'Single Phase, 6 KVA' },
+        { n: 'HYKON 10 KVA Industrial UPS', p: '₹1,45,000', b: 'HYKON', s: '3 Phase IN/OUT' },
+        { n: 'APC 60 KVA Online UPS', p: '₹19,90,000', b: 'APC', s: '3 Phase IN/OUT' },
+        { n: 'IGBT Online UPS 5 KVA', p: '₹24,500', b: 'Hitachi', s: '1 Phase IN/OUT' },
+        { n: '1 KVA Online UPS', p: '₹18,500', b: 'Numeric', s: 'Single Phase, 1 KVA' },
+        { n: 'Numeric 15 KVA Online UPS', p: '₹3,20,000', b: 'Numeric', s: '3 Phase, 15 KVA' }],
+        info: 'We are authorized dealers for Numeric, APC, Hitachi, HYKON UPS systems. All come with warranty and AMC support.'
+      },
+      solar: {
+        kw: ['solar', 'ongrid', 'offgrid', 'off-grid', 'on-grid', 'solar pump', 'panel', 'water pump'],
+        products: [{ n: 'Ongrid Solar 3 KW', p: 'Price on Request', b: 'Multiple', s: 'Grid-tied, Net metering, No battery' },
+        { n: 'Ongrid Solar 5 KW', p: 'Price on Request', b: 'Multiple', s: 'Reduces bill by 90%' },
+        { n: 'Offline Solar UPS 2 KVA', p: 'Price on Request', b: 'Multiple', s: 'Battery backup 6-12 hrs' },
+        { n: 'Offline Solar UPS 5 KVA', p: 'Price on Request', b: 'Multiple', s: 'Ideal for homes & shops' },
+        { n: 'Solar Water Pump 1 HP', p: 'Price on Request', b: 'Multiple', s: 'PM-KUSUM eligible, agriculture' },
+        { n: 'Solar Water Pump 5 HP', p: 'Price on Request', b: 'Multiple', s: 'Borewell, drip irrigation' }],
+        info: 'Complete solar solutions — supply, installation, AMC. Eligible for PM Surya Ghar & PM-KUSUM subsidies. Free site survey!'
+      },
+      battery: {
+        kw: ['battery', 'tubular', 'smf', 'vrla', 'inverter battery', 'backup', 'ah'],
+        products: [{ n: 'Exide Tubular 150 AH', p: '₹14,500', b: 'Exide', s: '5 Year warranty, Tall Tubular' },
+        { n: 'Exide Tubular 200 AH', p: '₹18,200', b: 'Exide', s: '5 Year warranty, Tall Tubular' },
+        { n: 'Luminous Battery 150 AH', p: '₹13,800', b: 'Luminous', s: '4 Year warranty' },
+        { n: 'Okaya SMF 150 AH', p: '₹12,800', b: 'Okaya', s: 'VRLA, Maintenance free' },
+        { n: 'SF Sonic 100 AH', p: '₹9,500', b: 'SF Sonic', s: 'SMF, Sealed' },
+        { n: 'Microtek MTek+ 150 AH', p: '₹13,200', b: 'Microtek', s: '3.5 Year warranty' }],
+        info: 'We stock all major brands — Exide, Luminous, Okaya, Microtek, SF Sonic. All genuine with full warranty.'
+      },
+      stabilizer: {
+        kw: ['stabilizer', 'voltage', 'servo', 'avr', 'regulator'],
+        products: [{ n: 'Single Phase Stabilizer 5 KVA', p: '₹8,500', b: 'Multiple', s: 'Servo controlled' },
+        { n: 'Three Phase Stabilizer 10 KVA', p: '₹45,000', b: 'Multiple', s: 'Industrial use' },
+        { n: 'Three Phase Stabilizer 30 KVA', p: '₹1,10,000', b: 'Multiple', s: 'Heavy duty' }],
+        info: 'Servo voltage stabilizers for homes, offices, and industries. Single and three phase available.'
+      },
+      inverter: {
+        kw: ['home inverter', 'lift inverter', 'inverter', 'power backup', 'home ups'],
+        products: [{ n: 'Home Inverter 700 VA', p: '₹4,500', b: 'Luminous', s: 'Pure sine wave, home use' },
+        { n: 'Home Inverter 1500 VA', p: '₹7,800', b: 'Microtek', s: '3 fans + TV + lights' },
+        { n: 'Lift Inverter 10 KVA', p: 'Price on Request', b: 'Multiple', s: 'Dedicated lift, 3 phase' }],
+        info: 'Home inverters and dedicated lift inverter systems for residential and commercial buildings.'
+      },
+      amc: {
+        kw: ['amc', 'maintenance', 'service', 'repair', 'annual', 'contract'],
+        products: [],
+        info: 'Annual Maintenance Contracts (AMC) for all brands of UPS, batteries, inverters, solar systems. 24/7 emergency support included. Call +91-99945 06370 for pricing.'
+      },
+      contact: {
+        kw: ['address', 'location', 'phone', 'call', 'email', 'contact', 'where', 'hours', 'timing', 'visit'],
+        products: [],
+        info: '📍 5/270, Balaji Complex, 7th Street Ext, Gandhipuram, Coimbatore – 641012\n📞 +91-99945 06370\n✉ skytechpowersystems@gmail.com\n🕐 Monday – Saturday: 9:00 AM – 9:00 PM'
+      },
+      survey: {
+        kw: ['survey', 'site visit', 'free', 'quote', 'estimate'],
+        products: [],
+        info: 'FREE Technical Site Survey available! Our engineers visit your site, assess power needs, give a detailed quotation — at no cost. Call +91-99945 06370 to book.'
+      },
+    };
+
+    const generateLocalAI = (message) => {
+      const msg = message.toLowerCase().trim();
+
+      // Greetings
+      if (/^(hi|hello|hey|hlo|hii|good|namaste|vanakkam)/.test(msg))
+        return `Hello! 👋 Welcome to Sky Tech Power Systems!\n\nI can help you with:\n⚡ UPS Systems\n☀️ Solar Solutions\n🔋 Batteries\n📊 Stabilizers\n🔌 Lift Inverters\n🛠️ AMC & Service\n\nWhat do you need help with?`;
+
+      // Thanks / bye
+      if (/(thank|thanks|bye|goodbye|ok thanks|got it)/.test(msg))
+        return `You're welcome! 😊 For quick assistance:\n📞 +91-99945 06370\n🕐 Mon–Sat: 9 AM – 9 PM`;
+
+      // Search knowledge base
+      for (const [cat, data] of Object.entries(LOCAL_AI_KB)) {
+        if (data.kw.some(k => msg.includes(k))) {
+          let resp = `**${cat.toUpperCase()} — Sky Tech Power Systems**\n\n${data.info}`;
+          if (data.products.length) {
+            resp += `\n\n📦 **Our Products:**`;
+            data.products.forEach(p => {
+              resp += `\n\n• **${p.n}**\n  Brand: ${p.b} | Price: ${p.p}\n  ${p.s}`;
+            });
+            resp += `\n\n📞 Call for enquiry: **+91-99945 06370**`;
+          }
+          return resp;
+        }
+      }
+
+      // Price query
+      if (/(price|cost|rate|how much|charges)/.test(msg))
+        return `💡 **Quick Prices:**\n• Home Inverter: from ₹4,500\n• UPS Systems: from ₹18,500\n• Batteries: from ₹9,500\n• Solar: Free site survey needed\n\n📞 **+91-99945 06370** for exact pricing.`;
+
+      // Warranty
+      if (/(warranty|guarantee|support after)/.test(msg))
+        return `🔋 Batteries: 3–5 years\n⚡ UPS Systems: 1–2 years + AMC\n☀️ Solar Panels: 25 years\n\nAMC contracts available for all products with 24/7 support.\n📞 +91-99945 06370`;
+
+      // Default
+      return `I can help with:\n• "What UPS systems do you have?"\n• "Tell me about solar solutions"\n• "What batteries are available?"\n• "What is your address?"\n• "Do you offer free site survey?"\n\n📞 **+91-99945 06370**`;
+    };
+
+    const sendMsg = () => {
+      const inp = document.getElementById('chinput');
+      if (!inp) return;
+      const msg = inp.value.trim();
+      if (!msg || !S.chatJoined) return;
+      // Emit to server (INT222 Unit V: Socket.IO)
+      if (socket) { socket.emit('message:send', { message: msg, room: S.chatRoom }); }
+      else {
+        // Standalone: show own message immediately, bot reply after delay
+        appendMsg({ name: S.chatName, message: msg, timestamp: new Date() }, true);
+        // AI response via Socket.IO (handled by server) or local KB if standalone
+        if (!socket) {
+          // Standalone mode: use local AI knowledge base
+          new Promise(resolve => setTimeout(resolve, 900)).then(() => {
+            const reply = generateLocalAI(msg);
+            appendMsg({ name: '🤖 Sky Tech AI', message: reply, timestamp: new Date(), isAI: true }, false);
+          });
+        }
+      }
+      inp.value = '';
+    };
+
+    const chatKey = (e) => { if (e.key === 'Enter') sendMsg(); };
+    const chatTyping = () => {
+      socket?.emit('user:typing', { room: S.chatRoom });
+    };
+
+    // DOM manipulation for chat (INT219 Unit IV)
+    const appendMsg = (data, mine = false) => {
+      const msgs = document.getElementById('chmsgs');
+      if (!msgs) return;
+      const time = new Date(data.timestamp).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+      const d = document.createElement('div');
+      const isAI = data.isAI || data.name?.includes('AI') || data.name?.includes('Bot');
+      d.className = `cmsg${mine ? ' mine' : ''}`;
+      // Format AI message: bold **text**, newlines → <br>
+      let fmtMsg = escHtml(data.message);
+      if (isAI) {
+        fmtMsg = fmtMsg
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\n/g, '<br>');
+      }
+      const bubbleStyle = isAI ? 'border-left:3px solid #29abe2;' : '';
+      d.innerHTML = `<div class="cbbl" style="${bubbleStyle}">${fmtMsg}</div><div class="cmeta">${mine ? 'You' : data.name} · ${time}</div>`;
+      msgs.appendChild(d);
+      msgs.scrollTop = msgs.scrollHeight;
+    };
+    const appendSys = (t) => {
+      const m = document.getElementById('chmsgs');
+      if (!m) return;
+      const d = document.createElement('div');
+      d.className = 'csys'; d.textContent = t;
+      m.appendChild(d); m.scrollTop = m.scrollHeight;
+    };
+    const showTyping = (name) => {
+      const t = document.getElementById('typi');
+      if (!t) return;
+      t.textContent = `${name} is typing...`; t.style.display = 'inline';
+      clearTimeout(S.tyTimer);
+      S.tyTimer = setTimeout(() => t.style.display = 'none', 2000);
+    };
+    const updateOnline = (n) => {
+      const el = document.getElementById('onlineEl');
+      if (el) el.textContent = `● ${n} online`;
+      const co = document.getElementById('conlinec');
+      if (co) co.textContent = `${n} user${n !== 1 ? 's' : ''} online`;
+    };
+
+    // ════════════════════════════════════════════════════════════
+    //  UTILITY
+    // ════════════════════════════════════════════════════════════
+    // XSS prevention — escapeHtml (INT219 Unit VI)
+    const escHtml = (str) => {
+      const d = document.createElement('div');
+      d.appendChild(document.createTextNode(str));
+      return d.innerHTML;
+    };
+    // Toast (INT219 Unit IV: DOM manipulation)
+    const toast = (msg) => {
+      const t = document.getElementById('toastEl');
+      if (!t) return;
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    };
+    const showLNotif = (msg) => {
+      const n = document.getElementById('lnotif');
+      if (!n) return;
+      n.textContent = msg; n.style.display = 'flex';
+      setTimeout(() => n.style.display = 'none', 5000);
+    };
+
+    // Event delegation (INT219 Unit IV: Event propagation)
+    document.addEventListener('click', (e) => {
+      if (e.target.matches('.bq')) {
+        const card = e.target.closest('.pcard');
+        const tit = card?.querySelector('.ptit')?.textContent;
+        if (tit) prefillEnquiry(tit);
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMnav();
+    });
+
+    // ════════════════════════════════════════════════════════════
+    //  INTERSECTION OBSERVER — trigger counter animation
+    //  (INT219 Unit IV: Browser APIs)
+    // ════════════════════════════════════════════════════════════
+    const initObserver = () => {
+      const target = document.querySelector('.hero-services-box');
+      if (!target) return;
+      // Observer (modern Browser API — INT219 Unit IV)
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { animCounters(); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.3 });
+      obs.observe(target);
+    };
+
+    // ════════════════════════════════════════════════════════════
+    //  DOMContentLoaded — async init (INT219 Unit III: async/await)
+    //  Promise.all for parallel execution
+    // ════════════════════════════════════════════════════════════
+    document.addEventListener('DOMContentLoaded', async () => {
+      console.log('🚀 Sky Tech Power Systems — INT219 + INT222 Project');
+      try {
+        // Promise.all for parallel init (INT219 Unit III)
+        await Promise.all([
+          Promise.resolve(initSocket()),
+          Promise.resolve(renderFeatured()),
+        ]);
+        buildGallery();
+        renderReviews();
+        checkLogin();
+        initObserver();
+        // Init slideshow thumbnails on load
+        buildThumbs('ongrid');
+        buildThumbs('offline');
+        buildThumbs('pump');
+        buildThumbs('ups-online');
+        buildThumbs('ups-offline');
+        buildThumbs('ups-solar-online');
+        buildThumbs('ups-solar-offline');
+        initPumpVideo();
+        // Pre-set all slide totals correctly
+        S.slides.offline.tot = S.offlinePaths.length;
+        S.slides.pump.tot = S.pumpPaths.length;
+        S.slides['ups-online'].tot = S['ups-onlinePaths'].length;
+        S.slides['ups-offline'].tot = S['ups-offlinePaths'].length;
+        S.slides['ups-solar-online'].tot = S['ups-solar-onlinePaths'].length;
+        S.slides['ups-solar-offline'].tot = S['ups-solar-offlinePaths'].length;
+        // Health check (async/await chain)
+        try {
+          const r = await fetch(`${API}/health`);
+          const d = await r.json();
+          console.log('✅ API Connected:', d.status);
+          showLNotif('✅ Connected to Sky Tech server — all features active');
+          setTimeout(() => document.getElementById('lnotif') && (document.getElementById('lnotif').style.display = 'none'), 4000);
+        } catch {
+          console.log('💡 Standalone mode — backend not connected. All frontend features work!');
+        }
+      } catch (err) {
+        console.warn('Init warning:', err.message);
+        buildGallery(); renderReviews(); checkLogin();
+      }
+    });
+  </script>
+  <!-- Socket.IO client (served by Node.js) -->
+  <script src="/socket.io/socket.io.js">
+    // ── PRODUCT SPEC MODAL ────────────────────────────────────────
+    const SPEC_DETAIL = {
+      13: {
+        title: 'BPE MF Series 1 KVA Online UPS',
+        model: 'MF1101B3',
+        certs: ['ISO 9001', 'ISO 14001', 'ISO 27001', 'ISO 45001', 'BIS', 'RoHS', 'CE', 'IS 16242'],
+        sections: [
+          {
+            title: 'INPUT', rows: [
+              ['Nominal Voltage', '220V / 230V / 240V AC (1Ph+N+PE, 3 Wire)'],
+              ['Operating Voltage Range', '100V ~ 300V AC (Load Dependent)'],
+              ['Frequency Range', '50 / 60 Hz ± 10% (Auto Sensing)'],
+              ['Input Power Factor', '> 0.99'],
+            ]
+          },
+          {
+            title: 'OUTPUT', rows: [
+              ['Output Voltage', '220V / 230V / 240V AC ±1%'],
+              ['Output Power Factor', '0.8 Standard, 0.9 Optional'],
+              ['Output Frequency', 'Auto Sensing 50/60 Hz ± 1–10% Sync Mode'],
+              ['Harmonic Distortion (THDv)', '≤ 1%'],
+              ['Crest Factor', '3:1'],
+              ['Efficiency', '94% Dual Conversion | 99% ECO Mode'],
+              ['Transfer Time', '0ms AC to Battery | 4ms Inverter to Bypass'],
+            ]
+          },
+          {
+            title: 'BATTERY', rows: [
+              ['DC Voltage', '36V'],
+              ['Battery Type', '12V / 7AH × 3 Internal VRLA'],
+              ['Backup @ 50% Load', '12 Minutes'],
+              ['Backup @ Full Load', '5 Minutes'],
+              ['Charge Current', '1A'],
+              ['Recharge Time', '4–5 Hours (90% capacity)'],
+            ]
+          },
+          {
+            title: 'SYSTEM FEATURES', rows: [
+              ['LCD Display', 'Input/Output Voltage, Frequency, Battery Voltage, Load %, Temperature, Mode'],
+              ['Overload Capability', '≤125% for 10 min | 125–150% for 1 min | >150% for 200ms'],
+              ['Technology', 'True Online, Double Conversion, PWM'],
+              ['Communication', 'RS-232 Standard | SNMP/ModBus/USB Optional'],
+              ['Auto-start', 'Yes — Cold Start Feature'],
+              ['ECO Mode', 'Yes — 99% Efficiency'],
+              ['Generator/Solar', 'Compatible'],
+              ['Bypass', 'Static Bypass + Manual Bypass'],
+            ]
+          },
+          {
+            title: 'PHYSICAL', rows: [
+              ['Dimensions (WxDxH)', '144 × 400 × 215 mm'],
+              ['Weight', '11.2 Kg'],
+              ['Operating Temp', '0°C ~ 50°C'],
+              ['Humidity', '0–95% RH Non-condensing'],
+              ['Noise', '≤ 45 dBA'],
+            ]
+          },
+        ]
+      },
+      14: {
+        title: 'BPE MF Series 2 KVA Online UPS',
+        model: 'MF1102B8',
+        certs: ['ISO 9001', 'ISO 14001', 'ISO 27001', 'ISO 45001', 'BIS', 'RoHS', 'CE', 'IS 16242'],
+        sections: [
+          {
+            title: 'INPUT', rows: [
+              ['Nominal Voltage', '220V / 230V / 240V AC (1Ph+N+PE, 3 Wire)'],
+              ['Operating Voltage Range', '100V ~ 300V AC (Load Dependent)'],
+              ['Frequency Range', '50 / 60 Hz ± 10% (Auto Sensing)'],
+              ['Input Power Factor', '> 0.99'],
+            ]
+          },
+          {
+            title: 'OUTPUT', rows: [
+              ['Output Voltage', '220V / 230V / 240V AC ±1%'],
+              ['Output Power Factor', '0.8 Standard, 0.9 Optional'],
+              ['Harmonic Distortion (THDv)', '≤ 1%'],
+              ['Efficiency', '94% Dual Conversion | 99% ECO Mode'],
+              ['Transfer Time', '0ms AC to Battery | 4ms Inverter to Bypass'],
+            ]
+          },
+          {
+            title: 'BATTERY', rows: [
+              ['DC Voltage', '96V'],
+              ['Battery Type', '12V / 7AH × 8 Internal VRLA'],
+              ['Backup @ 50% Load', '19 Minutes'],
+              ['Backup @ Full Load', '8 Minutes'],
+              ['Charge Current', '1A'],
+              ['Recharge Time', '4–5 Hours (90% capacity)'],
+            ]
+          },
+          {
+            title: 'SYSTEM FEATURES', rows: [
+              ['Technology', 'True Online, Double Conversion, PWM'],
+              ['LCD Display', 'Input/Output V/F, Battery Voltage, Load %, Temperature, Mode'],
+              ['Overload Capability', '≤125% for 10 min | 125–150% for 1 min | >150% for 200ms'],
+              ['Communication', 'RS-232 | SNMP/ModBus/USB/RS-485 Optional'],
+              ['Generator/Solar', 'Compatible'],
+              ['Bypass', 'Static Bypass + Manual Bypass'],
+              ['ECO Mode', 'Yes — 99% Efficiency'],
+            ]
+          },
+          {
+            title: 'PHYSICAL', rows: [
+              ['Dimensions (WxDxH)', '192 × 469 × 399 mm'],
+              ['Weight', '26.7 Kg'],
+              ['Operating Temp', '0°C ~ 50°C'],
+              ['Humidity', '0–95% RH Non-condensing'],
+              ['Noise', '≤ 45 dBA'],
+            ]
+          },
+        ]
+      },
+      15: {
+        title: 'BPE MF Series 3 KVA Online UPS',
+        model: 'MF1103B8',
+        certs: ['ISO 9001', 'ISO 14001', 'ISO 27001', 'ISO 45001', 'BIS', 'RoHS', 'CE', 'IS 16242'],
+        sections: [
+          {
+            title: 'INPUT', rows: [
+              ['Nominal Voltage', '220V / 230V / 240V AC (1Ph+N+PE, 3 Wire)'],
+              ['Operating Voltage Range', '100V ~ 300V AC (Load Dependent)'],
+              ['Frequency Range', '50 / 60 Hz ± 10% (Auto Sensing)'],
+              ['Input Power Factor', '> 0.99'],
+            ]
+          },
+          {
+            title: 'OUTPUT', rows: [
+              ['Output Voltage', '220V / 230V / 240V AC ±1%'],
+              ['Output Power Factor', '0.8 Standard, 0.9 Optional'],
+              ['Harmonic Distortion (THDv)', '≤ 1%'],
+              ['Efficiency', '94% Dual Conversion | 99% ECO Mode'],
+              ['Transfer Time', '0ms AC to Battery | 4ms Inverter to Bypass'],
+            ]
+          },
+          {
+            title: 'BATTERY', rows: [
+              ['DC Voltage', '96V'],
+              ['Battery Type', '12V / 7AH × 8 Internal VRLA'],
+              ['Backup @ 50% Load', '16 Minutes'],
+              ['Backup @ Full Load', '5 Minutes'],
+              ['Charge Current', '1A'],
+              ['Recharge Time', '4–5 Hours (90% capacity)'],
+            ]
+          },
+          {
+            title: 'SYSTEM FEATURES', rows: [
+              ['Technology', 'True Online Double Conversion & PWM'],
+              ['IGBT Based', 'Inverter & Rectifier'],
+              ['LCD Display', '50 Items Configurable via LCD'],
+              ['Overload Capability', '≤125% for 10 min | 125–150% for 1 min | >150% for 200ms'],
+              ['Communication', 'RS-232 | SNMP/ModBus/USB/RS-485 Optional'],
+              ['Auto-start', 'Yes + Cold Start Feature'],
+              ['Generator/Solar', 'Compatible'],
+              ['Isolation Transformer', 'Compatible'],
+              ['ECO Mode', 'Yes — 99% Efficiency'],
+              ['Bypass', 'Static Bypass + Manual Bypass'],
+            ]
+          },
+          {
+            title: 'PHYSICAL', rows: [
+              ['Dimensions (WxDxH)', '192 × 469 × 399 mm'],
+              ['Weight', '26.7 Kg'],
+              ['Operating Temp', '0°C ~ 50°C'],
+              ['Humidity', '0–95% RH Non-condensing'],
+              ['Noise', '≤ 45 dBA'],
+            ]
+          },
+        ]
+      }
+    };
+
+    const showSpecModal = (id) => {
+      const d = SPEC_DETAIL[id];
+      if (!d) return;
+      document.getElementById('smTitle').textContent = d.title;
+      document.getElementById('smSubtitle').textContent = `Model: ${d.model} | Brand: BPE — Best Power Equipments India Pvt. Ltd.`;
+
+      let body = '';
+
+      // Certifications
+      body += `<div class="bpe-badge-row">${d.certs.map(c => `<span class="bpe-cert">${c}</span>`).join('')}</div>`;
+
+      // Manufacturer info
+      body += `<div style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;padding:14px;margin-bottom:20px;font-size:13px;color:#1b5e20">
+    <strong>📦 Best Power Equipments India Pvt. Ltd.</strong><br>
+    Corporate: G-240, Sector-63, Noida – 201307, UP<br>
+    📞 +91-120-4637000 | 📧 crm@bpe.co.in | Toll Free: 1800 103 1247<br>
+    🌐 <a href="https://www.bpee.com" target="_blank" style="color:#1b5e20">www.bpee.com</a>
+  </div>`;
+
+      // Spec sections
+      d.sections.forEach(sec => {
+        body += `<div class="spec-section">
+      <div class="spec-section-title">${sec.title}</div>
+      <table class="spec-table">
+        ${sec.rows.map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('')}
+      </table>
+    </div>`;
+      });
+
+      document.getElementById('smBody').innerHTML = body;
+      document.getElementById('specModalOverlay').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeSpecModal = () => {
+      document.getElementById('specModalOverlay').style.display = 'none';
+      document.body.style.overflow = '';
+    };
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSpecModal(); });
+
+  </script>
+</body>
+
+</html>

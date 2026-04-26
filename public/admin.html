@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sky Tech — Admin Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
+/* SIDEBAR */
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:230px;background:#1e293b;padding:0;display:flex;flex-direction:column;border-right:1px solid #334155}
+.sb-logo{padding:22px 20px;border-bottom:1px solid #334155;display:flex;align-items:center;gap:10px}
+.sb-logo svg{flex-shrink:0}
+.sb-logo-text .t1{font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;color:#38bdf8;letter-spacing:.5px}
+.sb-logo-text .t2{font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:1px}
+.sb-nav{padding:12px 0;flex:1;overflow-y:auto}
+.sb-section{font-size:10px;color:#475569;font-weight:600;letter-spacing:1.5px;padding:10px 20px 5px;text-transform:uppercase}
+.sb-btn{display:flex;align-items:center;gap:10px;width:100%;padding:10px 20px;background:none;border:none;color:#94a3b8;font-size:13.5px;cursor:pointer;text-align:left;transition:all .2s;font-family:'DM Sans',sans-serif}
+.sb-btn:hover,.sb-btn.active{background:rgba(56,189,248,.08);color:#38bdf8}
+.sb-btn.active{border-right:3px solid #38bdf8}
+.sb-ico{font-size:16px;width:22px;text-align:center}
+.sb-badge{margin-left:auto;background:#ef4444;color:#fff;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700}
+.sb-logout{margin:12px;padding:10px;background:#ef4444;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;width:calc(100% - 24px)}
+/* MAIN */
+.main{margin-left:230px;padding:24px;min-height:100vh}
+.topbar-ad{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.page-title{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;color:#f1f5f9}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.admin-name{font-size:13px;color:#64748b}
+.live-dot{width:8px;height:8px;background:#22c55e;border-radius:50%;display:inline-block;margin-right:6px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+/* SECTION PANELS */
+.panel{display:none}.panel.active{display:block}
+/* STAT CARDS */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.scard{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:20px}
+.scard-num{font-family:'Rajdhani',sans-serif;font-size:36px;font-weight:700;color:#38bdf8}
+.scard-lbl{font-size:13px;color:#64748b;margin-top:4px}
+.scard-ico{font-size:28px;margin-bottom:8px}
+/* TABLE */
+.tbl-wrap{background:#1e293b;border:1px solid #334155;border-radius:12px;overflow:hidden}
+.tbl-head{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #334155}
+.tbl-title{font-size:15px;font-weight:600;color:#f1f5f9}
+.tbl-filters{display:flex;gap:8px;flex-wrap:wrap}
+.tbl-filter{padding:5px 14px;border-radius:5px;border:1px solid #334155;background:transparent;color:#94a3b8;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.tbl-filter.active,.tbl-filter:hover{background:#38bdf8;color:#0f172a;border-color:#38bdf8}
+.tbl-search{padding:7px 12px;border:1px solid #334155;border-radius:6px;background:#0f172a;color:#e2e8f0;font-size:13px;width:200px;outline:none}
+.tbl-search:focus{border-color:#38bdf8}
+table{width:100%;border-collapse:collapse}
+th{background:#0f172a;color:#64748b;font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;padding:10px 16px;text-align:left}
+td{padding:12px 16px;font-size:13.5px;border-bottom:1px solid #1e293b;color:#cbd5e1;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(56,189,248,.04)}
+.status-pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
+.s-new{background:rgba(59,130,246,.15);color:#60a5fa}
+.s-contacted{background:rgba(34,197,94,.15);color:#4ade80}
+.s-closed{background:rgba(100,116,139,.15);color:#94a3b8}
+.action-btn{padding:5px 10px;border-radius:5px;border:none;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;transition:all .2s}
+.btn-contacted{background:rgba(34,197,94,.15);color:#4ade80}.btn-contacted:hover{background:#16a34a;color:#fff}
+.btn-close{background:rgba(100,116,139,.15);color:#94a3b8}.btn-close:hover{background:#475569;color:#fff}
+.btn-delete{background:rgba(239,68,68,.15);color:#f87171}.btn-delete:hover{background:#dc2626;color:#fff}
+.btn-approve{background:rgba(34,197,94,.15);color:#4ade80}.btn-approve:hover{background:#16a34a;color:#fff}
+/* REVIEW STARS */
+.rstars{color:#fbbf24;font-size:14px}
+/* EMPTY STATE */
+.empty{text-align:center;padding:48px 24px;color:#475569}
+.empty-ico{font-size:48px;margin-bottom:12px}
+/* LOADING */
+.loading-ad{text-align:center;padding:40px;color:#475569}
+/* LOGIN */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0f172a}
+.login-box{background:#1e293b;border:1px solid #334155;border-radius:16px;padding:40px;width:400px}
+.login-box h2{font-family:'Rajdhani',sans-serif;font-size:28px;font-weight:700;color:#38bdf8;margin-bottom:6px}
+.login-box p{font-size:13px;color:#64748b;margin-bottom:28px}
+.fg{margin-bottom:16px}
+.fg label{display:block;font-size:13px;color:#94a3b8;margin-bottom:6px;font-weight:500}
+.fg input{width:100%;padding:10px 14px;background:#0f172a;border:1px solid #334155;border-radius:7px;color:#e2e8f0;font-size:14px;outline:none;font-family:'DM Sans',sans-serif;transition:border .2s}
+.fg input:focus{border-color:#38bdf8}
+.login-btn{width:100%;padding:12px;background:#38bdf8;color:#0f172a;border:none;border-radius:7px;font-size:15px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
+.login-btn:hover{background:#0ea5e9}
+.login-err{background:rgba(239,68,68,.15);color:#f87171;padding:10px;border-radius:6px;font-size:13px;margin-top:10px;display:none}
+/* PAGINATION */
+.pgn{display:flex;gap:6px;justify-content:center;padding:16px}
+.pg-btn{padding:6px 12px;border-radius:5px;border:1px solid #334155;background:transparent;color:#94a3b8;font-size:12px;cursor:pointer;transition:all .2s}
+.pg-btn.active,.pg-btn:hover{background:#38bdf8;color:#0f172a;border-color:#38bdf8}
+.pg-btn:disabled{opacity:.35;cursor:not-allowed}
+/* TOAST */
+.toast-ad{position:fixed;bottom:24px;right:24px;background:#22c55e;color:#fff;padding:12px 20px;border-radius:8px;font-size:14px;transform:translateX(200%);transition:transform .3s;z-index:9999}
+.toast-ad.show{transform:translateX(0)}
+/* REFRESH */
+.refresh-btn{background:rgba(56,189,248,.1);color:#38bdf8;border:1px solid rgba(56,189,248,.3);padding:7px 16px;border-radius:6px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.refresh-btn:hover{background:rgba(56,189,248,.2)}
+</style>
+</head>
+<body>
+
+<!-- LOGIN WALL -->
+<div id="loginWall" class="login-wrap">
+  <div class="login-box">
+    <h2>🔐 Admin Login</h2>
+    <p>Sky Tech Power Systems — Owner Dashboard</p>
+    <div class="fg"><label>Email</label><input type="email" id="adEmail" placeholder="admin@skytechpowersystems.com" value="admin@skytechpowersystems.com"></div>
+    <div class="fg"><label>Password</label><input type="password" id="adPass" placeholder="Password" value="Admin@123"></div>
+    <button class="login-btn" onclick="adminLogin()">Login to Dashboard</button>
+    <div class="login-err" id="loginErr"></div>
+    <p style="margin-top:16px;font-size:12px;color:#475569;text-align:center">
+      First time? Register at <a href="/" style="color:#38bdf8">the website</a> then update role to 'admin' in MongoDB Compass
+    </p>
+  </div>
+</div>
+
+<!-- DASHBOARD (shown after login) -->
+<div id="dashboard" style="display:none">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-logo">
+      <svg viewBox="0 0 68 52" width="40" height="30">
+        <polygon points="8,4 52,4 44,22 0,22" fill="#29abe2"/>
+        <polygon points="16,26 60,26 52,48 8,48" fill="#555f6e"/>
+        <polygon points="28,4 36,4 20,48 12,48" fill="white" opacity="0.9"/>
+      </svg>
+      <div class="sb-logo-text"><div class="t1">SKY TECH</div><div class="t2">Admin Panel</div></div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-section">Overview</div>
+      <button class="sb-btn active" onclick="showPanel('dashboard')"><span class="sb-ico">📊</span>Dashboard</button>
+      <div class="sb-section">Data</div>
+      <button class="sb-btn" onclick="showPanel('enquiries')"><span class="sb-ico">📩</span>Enquiries<span class="sb-badge" id="enqBadge">0</span></button>
+      <button class="sb-btn" onclick="showPanel('reviews')"><span class="sb-ico">⭐</span>Reviews</button>
+      <button class="sb-btn" onclick="showPanel('products')"><span class="sb-ico">📦</span>Products</button>
+      <button class="sb-btn" onclick="showPanel('users')"><span class="sb-ico">👥</span>Users</button>
+      <div class="sb-section">Tools</div>
+      <button class="sb-btn" onclick="showPanel('seed')"><span class="sb-ico">🌱</span>Seed Products</button>
+      <button class="sb-btn" onclick="window.open('/','_blank')"><span class="sb-ico">🌐</span>View Website</button>
+    </nav>
+    <button class="sb-logout" onclick="adminLogout()">🚪 Logout</button>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar-ad">
+      <div class="page-title" id="panelTitle">Dashboard</div>
+      <div class="topbar-right">
+        <span style="font-size:12px;color:#475569"><span class="live-dot"></span>Live</span>
+        <span class="admin-name" id="adminNameEl">Admin</span>
+        <button class="refresh-btn" onclick="refreshCurrent()">↻ Refresh</button>
+      </div>
+    </div>
+
+    <!-- ── DASHBOARD PANEL ── -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="stat-row" id="statRow">
+        <div class="scard"><div class="scard-ico">📩</div><div class="scard-num" id="st-enq">—</div><div class="scard-lbl">Total Enquiries</div></div>
+        <div class="scard"><div class="scard-ico">⭐</div><div class="scard-num" id="st-rev">—</div><div class="scard-lbl">Reviews</div></div>
+        <div class="scard"><div class="scard-ico">👥</div><div class="scard-num" id="st-usr">—</div><div class="scard-lbl">Registered Users</div></div>
+        <div class="scard"><div class="scard-ico">📦</div><div class="scard-num" id="st-prd">—</div><div class="scard-lbl">Products</div></div>
+      </div>
+      <div class="tbl-wrap" style="margin-bottom:20px">
+        <div class="tbl-head"><div class="tbl-title">📩 New Enquiries</div></div>
+        <div id="dashEnqTable"><div class="loading-ad">Loading...</div></div>
+      </div>
+      <div class="tbl-wrap">
+        <div class="tbl-head"><div class="tbl-title">⭐ Recent Reviews</div></div>
+        <div id="dashRevTable"><div class="loading-ad">Loading...</div></div>
+      </div>
+    </div>
+
+    <!-- ── ENQUIRIES PANEL ── -->
+    <div class="panel" id="panel-enquiries">
+      <div class="tbl-wrap">
+        <div class="tbl-head">
+          <div class="tbl-title">📩 All Enquiries</div>
+          <div class="tbl-filters">
+            <button class="tbl-filter active" onclick="filterEnq('',this)">All</button>
+            <button class="tbl-filter" onclick="filterEnq('new',this)">New</button>
+            <button class="tbl-filter" onclick="filterEnq('contacted',this)">Contacted</button>
+            <button class="tbl-filter" onclick="filterEnq('closed',this)">Closed</button>
+            <input class="tbl-search" id="enqSearch" placeholder="Search name / phone..." oninput="searchEnq()">
+          </div>
+        </div>
+        <div id="enqTableWrap"><div class="loading-ad">Loading...</div></div>
+        <div class="pgn" id="enqPgn"></div>
+      </div>
+    </div>
+
+    <!-- ── REVIEWS PANEL ── -->
+    <div class="panel" id="panel-reviews">
+      <div class="tbl-wrap">
+        <div class="tbl-head"><div class="tbl-title">⭐ All Reviews</div></div>
+        <div id="revTableWrap"><div class="loading-ad">Loading...</div></div>
+      </div>
+    </div>
+
+    <!-- ── PRODUCTS PANEL ── -->
+    <div class="panel" id="panel-products">
+      <div class="tbl-wrap">
+        <div class="tbl-head">
+          <div class="tbl-title">📦 Products</div>
+          <div class="tbl-filters">
+            <button class="tbl-filter active" onclick="filterProd('all',this)">All</button>
+            <button class="tbl-filter" onclick="filterProd('ups',this)">UPS</button>
+            <button class="tbl-filter" onclick="filterProd('battery',this)">Battery</button>
+            <button class="tbl-filter" onclick="filterProd('solar',this)">Solar</button>
+            <button class="tbl-filter" onclick="filterProd('stabilizer',this)">Stabilizer</button>
+          </div>
+        </div>
+        <div id="prodTableWrap"><div class="loading-ad">Loading...</div></div>
+      </div>
+    </div>
+
+    <!-- ── USERS PANEL ── -->
+    <div class="panel" id="panel-users">
+      <div class="tbl-wrap">
+        <div class="tbl-head"><div class="tbl-title">👥 Registered Users</div></div>
+        <div id="userTableWrap"><div class="loading-ad">Loading...</div></div>
+      </div>
+    </div>
+
+    <!-- ── SEED PANEL ── -->
+    <div class="panel" id="panel-seed">
+      <div class="tbl-wrap">
+        <div class="tbl-head"><div class="tbl-title">🌱 Database Tools</div></div>
+        <div style="padding:30px">
+          <p style="color:#94a3b8;margin-bottom:20px">Use these tools to manage your database. Seed will delete existing products and insert fresh demo data.</p>
+          <button onclick="seedProducts()" style="background:#22c55e;color:#fff;border:none;padding:12px 28px;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;margin-right:12px">🌱 Seed 12 Products</button>
+          <button onclick="loadProducts()" style="background:rgba(56,189,248,.15);color:#38bdf8;border:1px solid rgba(56,189,248,.3);padding:12px 28px;border-radius:8px;font-size:15px;cursor:pointer">↻ Refresh Products</button>
+          <div id="seedMsg" style="margin-top:16px;color:#4ade80;font-size:14px"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="toast-ad" id="adToast"></div>
+
+<script>
+'use strict';
+const API = '/api/v1';
+let TOKEN = localStorage.getItem('skt_admin_token') || '';
+let currentEnqFilter = '';
+let currentEnqPage   = 1;
+let currentProdFilter = 'all';
+let allEnquiries = [];
+let currentPanel = 'dashboard';
+
+// ── Admin Login ───────────────────────────────────────────────
+const adminLogin = async () => {
+  const email    = document.getElementById('adEmail').value.trim();
+  const password = document.getElementById('adPass').value;
+  const errEl    = document.getElementById('loginErr');
+  errEl.style.display = 'none';
+  try {
+    const r = await fetch(`${API}/auth/login`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email,password}) });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'Login failed');
+    if (d.user.role !== 'admin') throw new Error('Not an admin account. Update your role in MongoDB Compass.');
+    TOKEN = d.token;
+    localStorage.setItem('skt_admin_token', TOKEN);
+    localStorage.setItem('skt_admin_user', JSON.stringify(d.user));
+    document.getElementById('loginWall').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    document.getElementById('adminNameEl').textContent = d.user.name;
+    loadDashboard();
+  } catch (err) {
+    errEl.textContent = err.message;
+    errEl.style.display = 'block';
+  }
+};
+
+const adminLogout = () => {
+  localStorage.removeItem('skt_admin_token');
+  localStorage.removeItem('skt_admin_user');
+  TOKEN = '';
+  document.getElementById('loginWall').style.display = 'flex';
+  document.getElementById('dashboard').style.display = 'none';
+};
+
+// Check if already logged in
+window.addEventListener('DOMContentLoaded', () => {
+  const stored = localStorage.getItem('skt_admin_user');
+  if (TOKEN && stored) {
+    const u = JSON.parse(stored);
+    document.getElementById('loginWall').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    document.getElementById('adminNameEl').textContent = u.name;
+    loadDashboard();
+  }
+});
+
+// ── API helper ────────────────────────────────────────────────
+const api = async (endpoint, opts = {}) => {
+  const r = await fetch(`${API}${endpoint}`, {
+    ...opts,
+    headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${TOKEN}`, ...opts.headers }
+  });
+  const d = await r.json();
+  if (!r.ok) throw new Error(d.error || `HTTP ${r.status}`);
+  return d;
+};
+
+// ── Panel switching ───────────────────────────────────────────
+const showPanel = (id) => {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sb-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(`panel-${id}`)?.classList.add('active');
+  const btns = [...document.querySelectorAll('.sb-btn')];
+  const btn  = btns.find(b => b.onclick?.toString().includes(`'${id}'`));
+  if (btn) btn.classList.add('active');
+  const titles = { dashboard:'📊 Dashboard', enquiries:'📩 Enquiries', reviews:'⭐ Reviews', products:'📦 Products', users:'👥 Users', seed:'🌱 Database Tools' };
+  document.getElementById('panelTitle').textContent = titles[id] || id;
+  currentPanel = id;
+  if (id === 'dashboard')  loadDashboard();
+  if (id === 'enquiries')  loadEnquiries();
+  if (id === 'reviews')    loadReviews();
+  if (id === 'products')   loadProducts();
+  if (id === 'users')      loadUsers();
+};
+
+const refreshCurrent = () => showPanel(currentPanel);
+
+// ── DASHBOARD ─────────────────────────────────────────────────
+const loadDashboard = async () => {
+  try {
+    const d = await api('/admin/dashboard');
+    document.getElementById('st-enq').textContent = d.stats.enqCount;
+    document.getElementById('st-rev').textContent = d.stats.revCount;
+    document.getElementById('st-usr').textContent = d.stats.userCount;
+    document.getElementById('st-prd').textContent = d.stats.prodCount;
+
+    const newCount = d.newEnqs.filter(e => e.status === 'new').length;
+    document.getElementById('enqBadge').textContent = newCount || '';
+
+    // New enquiries mini-table
+    document.getElementById('dashEnqTable').innerHTML = d.newEnqs.length ? `
+      <table>
+        <tr><th>Name</th><th>Phone</th><th>Service</th><th>Status</th><th>Date</th></tr>
+        ${d.newEnqs.map(e => `<tr>
+          <td>${e.name}</td>
+          <td>${e.phone}</td>
+          <td>${e.service}</td>
+          <td><span class="status-pill s-${e.status}">${e.status}</span></td>
+          <td>${new Date(e.createdAt).toLocaleDateString('en-IN')}</td>
+        </tr>`).join('')}
+      </table>` : '<div class="empty"><div class="empty-ico">📭</div><p>No new enquiries</p></div>';
+
+    // Recent reviews
+    document.getElementById('dashRevTable').innerHTML = d.recentRevs.length ? `
+      <table>
+        <tr><th>Name</th><th>Stars</th><th>Review</th><th>Date</th></tr>
+        ${d.recentRevs.map(r => `<tr>
+          <td>${r.name}<br><span style="font-size:11px;color:#475569">${r.role||''}</span></td>
+          <td><span class="rstars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</span></td>
+          <td style="max-width:300px">${r.text}</td>
+          <td>${new Date(r.createdAt).toLocaleDateString('en-IN')}</td>
+        </tr>`).join('')}
+      </table>` : '<div class="empty"><div class="empty-ico">💬</div><p>No reviews yet</p></div>';
+  } catch (err) { adToast('❌ ' + err.message); }
+};
+
+// ── ENQUIRIES ─────────────────────────────────────────────────
+const loadEnquiries = async (page = 1) => {
+  currentEnqPage = page;
+  const statusParam = currentEnqFilter ? `&status=${currentEnqFilter}` : '';
+  try {
+    const d = await api(`/enquiry?page=${page}&limit=15${statusParam}`);
+    allEnquiries = d.data;
+    renderEnqTable(allEnquiries);
+    renderPgn('enqPgn', page, d.pagination.pages, loadEnquiries);
+  } catch (err) {
+    document.getElementById('enqTableWrap').innerHTML = `<div class="empty"><p>Error: ${err.message}</p></div>`;
+  }
+};
+
+const renderEnqTable = (enqs) => {
+  document.getElementById('enqTableWrap').innerHTML = enqs.length ? `
+    <table>
+      <tr><th>#</th><th>Name</th><th>Phone</th><th>Email</th><th>Service</th><th>Message</th><th>Status</th><th>Date</th><th>Actions</th></tr>
+      ${enqs.map((e,i) => `<tr>
+        <td style="color:#475569">${i+1}</td>
+        <td><strong>${e.name}</strong></td>
+        <td>${e.phone}</td>
+        <td style="color:#64748b">${e.email||'—'}</td>
+        <td><span style="background:rgba(56,189,248,.1);color:#38bdf8;padding:2px 8px;border-radius:4px;font-size:11px">${e.service}</span></td>
+        <td style="max-width:180px;font-size:12px;color:#94a3b8">${e.message||'—'}</td>
+        <td><span class="status-pill s-${e.status}">${e.status}</span></td>
+        <td style="font-size:12px;color:#475569">${new Date(e.createdAt).toLocaleDateString('en-IN')}<br>${new Date(e.createdAt).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})}</td>
+        <td style="display:flex;gap:5px;flex-wrap:wrap">
+          <button class="action-btn btn-contacted" onclick="updateEnqStatus('${e._id}','contacted')">✓ Contact</button>
+          <button class="action-btn btn-close" onclick="updateEnqStatus('${e._id}','closed')">✗ Close</button>
+          <button class="action-btn btn-delete" onclick="deleteEnq('${e._id}')">🗑</button>
+        </td>
+      </tr>`).join('')}
+    </table>` : '<div class="empty"><div class="empty-ico">📭</div><p>No enquiries found</p></div>';
+};
+
+const filterEnq = (status, btn) => {
+  currentEnqFilter = status;
+  document.querySelectorAll('.tbl-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  loadEnquiries(1);
+};
+
+const searchEnq = () => {
+  const q = document.getElementById('enqSearch').value.toLowerCase();
+  const filtered = allEnquiries.filter(e => e.name.toLowerCase().includes(q) || e.phone.includes(q) || (e.service||'').toLowerCase().includes(q));
+  renderEnqTable(filtered);
+};
+
+const updateEnqStatus = async (id, status) => {
+  try {
+    await api(`/enquiry/${id}`, { method:'PATCH', body: JSON.stringify({status}) });
+    adToast(`✅ Status updated to ${status}`);
+    loadEnquiries(currentEnqPage);
+  } catch (err) { adToast('❌ ' + err.message); }
+};
+
+const deleteEnq = async (id) => {
+  if (!confirm('Delete this enquiry?')) return;
+  try {
+    await api(`/enquiry/${id}`, { method:'DELETE' });
+    adToast('🗑 Enquiry deleted');
+    loadEnquiries(currentEnqPage);
+  } catch (err) { adToast('❌ ' + err.message); }
+};
+
+// ── REVIEWS ───────────────────────────────────────────────────
+const loadReviews = async () => {
+  try {
+    const d = await api('/reviews?limit=100');
+    document.getElementById('revTableWrap').innerHTML = d.data.length ? `
+      <div style="padding:14px 20px;border-bottom:1px solid #334155;display:flex;gap:20px;align-items:center">
+        <div><span style="font-size:32px;font-weight:700;color:#fbbf24">${d.stats.avgRating}</span><span style="color:#64748b;font-size:13px"> / 5.0</span></div>
+        <div><div class="rstars" style="font-size:18px">${'★'.repeat(Math.round(d.stats.avgRating))}${'☆'.repeat(5-Math.round(d.stats.avgRating))}</div><div style="font-size:12px;color:#475569">${d.stats.total} reviews</div></div>
+      </div>
+      <table>
+        <tr><th>#</th><th>Name</th><th>Role</th><th>Stars</th><th>Review</th><th>Date</th><th>Action</th></tr>
+        ${d.data.map((r,i) => `<tr>
+          <td style="color:#475569">${i+1}</td>
+          <td><strong>${r.name}</strong></td>
+          <td style="color:#64748b;font-size:12px">${r.role||'Customer'}</td>
+          <td><span class="rstars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</span></td>
+          <td style="max-width:260px">${r.text}</td>
+          <td style="font-size:12px;color:#475569">${new Date(r.createdAt).toLocaleDateString('en-IN')}</td>
+          <td><button class="action-btn btn-delete" onclick="deleteReview('${r._id}')">🗑 Delete</button></td>
+        </tr>`).join('')}
+      </table>` : '<div class="empty"><div class="empty-ico">⭐</div><p>No reviews yet. Customers will appear here when they submit reviews on the website.</p></div>';
+  } catch (err) {
+    document.getElementById('revTableWrap').innerHTML = `<div class="empty"><p>Error: ${err.message}</p></div>`;
+  }
+};
+
+const deleteReview = async (id) => {
+  if (!confirm('Delete this review?')) return;
+  try {
+    await api(`/reviews/${id}`, { method:'DELETE' });
+    adToast('🗑 Review deleted');
+    loadReviews();
+  } catch (err) { adToast('❌ ' + err.message); }
+};
+
+// ── PRODUCTS ──────────────────────────────────────────────────
+const loadProducts = async (cat = currentProdFilter) => {
+  currentProdFilter = cat;
+  const catParam = cat === 'all' ? '' : `&category=${cat}`;
+  try {
+    const d = await api(`/products?limit=50${catParam}`);
+    document.getElementById('prodTableWrap').innerHTML = d.data.length ? `
+      <table>
+        <tr><th>#</th><th>Title</th><th>Category</th><th>Price</th><th>Brand</th><th>Specs</th><th>Action</th></tr>
+        ${d.data.map((p,i) => `<tr>
+          <td style="color:#475569">${i+1}</td>
+          <td><strong>${p.title}</strong>${p.badge?` <span style="background:rgba(56,189,248,.1);color:#38bdf8;font-size:10px;padding:2px 6px;border-radius:3px">${p.badge}</span>`:''}</td>
+          <td><span style="text-transform:capitalize">${p.category}</span></td>
+          <td style="color:#4ade80;font-weight:600">${p.price} <span style="color:#475569;font-weight:400;font-size:11px">${p.unit||''}</span></td>
+          <td style="color:#94a3b8">${p.brand||'—'}</td>
+          <td style="font-size:12px;color:#64748b">${(p.specs||[]).join(' | ')}</td>
+          <td><button class="action-btn btn-delete" onclick="deleteProduct('${p._id}')">🗑</button></td>
+        </tr>`).join('')}
+      </table>` : '<div class="empty"><div class="empty-ico">📦</div><p>No products. Click "Seed Products" to add demo data.</p></div>';
+  } catch (err) {
+    document.getElementById('prodTableWrap').innerHTML = `<div class="empty"><p>Error: ${err.message}</p></div>`;
+  }
+};
+
+const filterProd = (cat, btn) => {
+  document.querySelectorAll('#panel-products .tbl-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  loadProducts(cat);
+};
+
+const deleteProduct = async (id) => {
+  if (!confirm('Delete product?')) return;
+  try {
+    await api(`/products/${id}`, { method:'DELETE' });
+    adToast('🗑 Product deleted');
+    loadProducts();
+  } catch (err) { adToast('❌ ' + err.message); }
+};
+
+// ── USERS ─────────────────────────────────────────────────────
+const loadUsers = async () => {
+  try {
+    const d = await api('/admin/users');
+    document.getElementById('userTableWrap').innerHTML = d.data.length ? `
+      <table>
+        <tr><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Role</th><th>Registered</th></tr>
+        ${d.data.map((u,i) => `<tr>
+          <td style="color:#475569">${i+1}</td>
+          <td><strong>${u.name}</strong></td>
+          <td>${u.email}</td>
+          <td>${u.phone||'—'}</td>
+          <td><span class="status-pill" style="${u.role==='admin'?'background:rgba(251,191,36,.15);color:#fbbf24':'background:rgba(100,116,139,.15);color:#94a3b8'}">${u.role}</span></td>
+          <td style="font-size:12px;color:#475569">${new Date(u.createdAt).toLocaleDateString('en-IN')}</td>
+        </tr>`).join('')}
+      </table>` : '<div class="empty"><div class="empty-ico">👥</div><p>No users registered yet.</p></div>';
+  } catch (err) {
+    document.getElementById('userTableWrap').innerHTML = `<div class="empty"><p>Error: ${err.message}</p></div>`;
+  }
+};
+
+// ── SEED ─────────────────────────────────────────────────────
+const seedProducts = async () => {
+  const msg = document.getElementById('seedMsg');
+  msg.textContent = '⏳ Seeding...';
+  try {
+    const d = await api('/products/seed/all', { method:'POST' });
+    msg.textContent = `✅ ${d.message}`;
+    adToast('✅ Products seeded!');
+  } catch (err) { msg.textContent = `❌ ${err.message}`; }
+};
+
+// ── PAGINATION ────────────────────────────────────────────────
+const renderPgn = (id, cur, total, cb) => {
+  const el = document.getElementById(id);
+  if (!el || total <= 1) { if(el) el.innerHTML=''; return; }
+  let h = `<button class="pg-btn" onclick="(${cb})(${cur-1})" ${cur===1?'disabled':''}>← Prev</button>`;
+  for (let i = 1; i <= total; i++)
+    h += `<button class="pg-btn${i===cur?' active':''}" onclick="(${cb})(${i})">${i}</button>`;
+  h += `<button class="pg-btn" onclick="(${cb})(${cur+1})" ${cur===total?'disabled':''}>Next →</button>`;
+  el.innerHTML = h;
+};
+
+// ── TOAST ─────────────────────────────────────────────────────
+const adToast = (msg) => {
+  const t = document.getElementById('adToast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+};
+</script>
+</body>
+</html>
